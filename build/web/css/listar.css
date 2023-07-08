@@ -1,0 +1,61 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 26 jun 2023, 20:38:49
+    Author     : Daniel
+*/
+
+body {
+    margin: 40px 80px;
+}
+
+.contenedor-tabla {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.tabla-personal thead th {
+    background-color: #212529;
+    color: #fff;
+}
+
+.boton-editar, .boton-eliminar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    transition: 0.3s ease;
+}
+
+/*
+https://codepen.io/sosuke/pen/Pjoqqp
+Para escoger un filtro a un color específico (Solo funciona con el color negro);
+*/
+
+.boton-editar:hover img {
+    transition: 0.3s ease;
+    filter: invert(74%) sepia(80%) saturate(854%) hue-rotate(167deg) brightness(102%) contrast(96%);
+    transform: scale(1.2);
+}
+
+.boton-eliminar:hover img{
+    transition: 0.3s ease;
+    filter: invert(28%) sepia(33%) saturate(4237%) hue-rotate(341deg) brightness(109%) contrast(90%);
+    transform: scale(1.2);
+}

@@ -1,0 +1,222 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 26 jun 2023, 20:17:51
+    Author     : Daniel
+*/
+
+.modal-open {
+    overflow: inherit !important;
+    padding: 0 !important;
+}
+
+.top-header {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    width: 100%;
+    min-width: 750px;
+    border-bottom: 2px solid #bdc3c7;
+    z-index: 2;
+}
+
+.imagen-logo {
+    margin-left: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+    height: auto;
+}
+
+.imagen-logo:hover {
+    transform: scale(1.1);
+    filter: invert(45%) sepia(93%) saturate(763%) hue-rotate(358deg) brightness(101%) contrast(110%);
+    transition: 0.5s;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    font-size: 16px;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+header li:hover {
+    color: #FF7F00;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+/*
+https://codepen.io/sosuke/pen/Pjoqqp
+Para escoger un filtro a un color específico (Solo funciona con el color negro);
+*/
+
+header li:hover img {
+    transform: scale(1.1);
+    filter: invert(45%) sepia(93%) saturate(763%) hue-rotate(358deg) brightness(101%) contrast(110%);
+    transition: 0.5s;
+}
+
+.barra-vertical {
+    border-left: 1px solid #000;
+}
+
+.icono-header {
+    width: 35px;
+    padding-bottom: 10px;
+    height: auto;
+}
+
+.boton-registro {
+    border: none;
+    border-radius: 30px;
+    margin-left: 20px;
+    padding: 16px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #404040;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.boton-registro:hover {
+    color: #000;
+    background-color: #C9D6FF;
+}
+
+.boton-iniciar {
+    border: 1px solid #FF7F00;
+    border-radius: 30px;
+    margin-left: 10px;
+    margin-right: 80px;
+    padding: 16px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #FF7F00;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.boton-iniciar:hover {
+    color: #000;
+    border: 1px solid #FF7F00;
+    background-color: #FF7F00;
+}
+
+.principal {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #bdc3c7;
+}
+
+.texto-principal {
+    text-align: center;
+    margin-top: 130px;
+    margin-bottom: 10px;
+    margin-left: 80px;
+    margin-right: 80px;
+
+}
+
+section h1 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+section h2 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.registro-rapido {
+    margin-top: 10px;
+}
+
+
+.seccion-fotos {
+    display: flex;
+    width: 60%;
+    height: 430px;
+    min-width: 600px;
+    margin: 0 auto;
+}
+
+.seccion-fotos img {
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.seccion-fotos img:hover {
+    cursor: crosshair;
+    width:430px;
+    opacity: 1;
+}
+
+footer {
+    display: flex;
+    margin-top: 10px;
+    background-color: #f7f7f7;
+    color: #000;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    gap: 20px;
+    min-width: 750px;
+}
+
+footer h3 {
+    font-size: 16px;
+}
+footer h4 {
+    color: #77777f;
+    font-size: 16px;
+}
+
+.icono-footer {
+    width: 40px;
+    height: auto;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+
+}
+
+footer li:hover img{
+    transform: scale(1.1);
+    color: #91EAE4;
+    transition: 0.5s;
+    cursor: pointer;
+    filter: invert(56%) sepia(36%) saturate(657%) hue-rotate(202deg) brightness(87%) contrast(90%);
+}
