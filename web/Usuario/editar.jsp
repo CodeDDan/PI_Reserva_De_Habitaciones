@@ -15,20 +15,51 @@
         <!-- El objeto en cuestión se lo genera en el controlador -->
     </head>
     <body>
-    <center>
         <form action="UsuarioControlador" method="post">
             <input type="hidden" name="id_edit" placeholder="Id" value="${usu.getId()}"><br>
-            <input type="text" name="nombre" placeholder="Nombre" value="${usu.getNombre()}"><br>
-            <input type="text" name="apellido" placeholder="Apellido" value="${usu.getApellido()}"><br>
-            <input type="password" name="password" placeholder="Contraseña" value="${usu.getPass()}"><br>
-            <input type="email" name="correo" placeholder="Correo" value="${usu.getCorreo()}"><br>
-            <input type="text" name="direccion" placeholder="Dirección" value="${usu.getDireccion()}"><br>
-            <input type="text" name="telefono" placeholder="Teléfono" value="${usu.getTelefono()}"><br>
+            <div class="form-group row" style="margin-bottom: 10px;">
+                <label class="col-sm-2 col-form-label">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="${usu.getNombre()}" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 10px;">
+                <label class="col-sm-2 col-form-label">Apellido</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="apellido" placeholder="Apellido" value="${usu.getApellido()}" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 10px;">
+                <label class="col-sm-2 col-form-label">Contraseña</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="password" aria-describedby="passHelp" placeholder="Contraseña" value="${usu.getPass()}" required>
+                    <small id="passHelp" class="form-text text-muted" style="margin-left: 13px;">Más de 8 caracteres</small>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 10px;">
+                <label class="col-sm-2 col-form-label">Correo</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="correo" aria-describedby="emailHelp" placeholder="ejemplo@correo.com" value="${usu.getCorreo()}" required>
+                    <small id="emailHelp" class="form-text text-muted" style="margin-left: 13px;">Comprobar el valor correcto</small>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 10px;">
+                <label class="col-sm-2 col-form-label">Dirección</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="direccion" placeholder="Calle 1 Calle 2" value="${usu.getDireccion()}" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 10px;">
+                <label class="col-sm-2 col-form-label">Teléfono</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="telefono" placeholder="+000 000 000 0000" value="${usu.getTelefono()}" required>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="submit" name="accion" value="actualizar" class="btn btn-primary">Actualizar</button>
             </div>
         </form>
-    </center>
-</body>
+    </body>
+    
 </html>
