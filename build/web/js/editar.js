@@ -9,9 +9,9 @@ function actualizarBotonEnvio() {
             $('input[name="telefono"]').val() === '';
 
     if (hayCamposInvalidos || hayCamposVacios) {
-        $('button[name="accion"][value="agregar_usuario"]').attr('disabled', 'disabled');
+        $('button[name="accion"][value="actualizar"]').attr('disabled', 'disabled');
     } else {
-        $('button[name="accion"][value="agregar_usuario"]').removeAttr('disabled');
+        $('button[name="accion"][value="actualizar"]').removeAttr('disabled');
     }
 }
 
@@ -106,7 +106,7 @@ $('input[name="direccion"]').on('input', function () {
 // Tenemos que envolver la inicialización en document.ready para que se ejecute cada que se carga
 $(document).ready(function () {
 
-    const phoneInputField = $(".control-telefono");
+    const phoneInputField = $(".control-telefonoE");
     const phoneInput = window.intlTelInput(phoneInputField[0], {
         initialCountry: "ec",
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
@@ -118,6 +118,13 @@ $(document).ready(function () {
         phoneInputField.val(phoneNumber); // Vuelve a establecer el número formateado en el campo de entrada
     });
 
+    // Formateamos el número antes de enviarlo 
+    $('button[name="accion"][value="actualizar"]').on("click", function () {
+        const phoneNumber = phoneInput.getNumber(); // Obtén el número de teléfono formateado
+        phoneInputField.val(phoneNumber); // Vuelve a establecer el número formateado en el campo de entrada
+    });
+
+    // Desactivar ingreso de letras en el campo de teléfono
     phoneInputField.on("keypress", function (event) {
         const key = event.which || event.keyCode;
         const char = String.fromCharCode(key);
@@ -128,7 +135,6 @@ $(document).ready(function () {
     });
 
     function validatePhoneNumber() {
-        // Desactivar ingreso de letras en el campo de teléfono
         const isValid = phoneInput.isValidNumber();
         // Recupera el código del país por letra
         const countryCode = phoneInput.getSelectedCountryData().iso2;
@@ -154,4 +160,3 @@ $(document).ready(function () {
 
     phoneInputField.on("input", validatePhoneNumber);
 });
-

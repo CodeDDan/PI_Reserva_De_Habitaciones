@@ -18,41 +18,41 @@
         <form action="UsuarioControlador" method="post">
             <input type="hidden" name="id_edit" placeholder="Id" value="${usu.getId()}"><br>
             <div class="form-group row" style="margin-bottom: 10px;">
-                <label class="col-sm-2 col-form-label">Nombre</label>
+                <span class="col-sm-2 col-form-label">Nombre</span>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="${usu.getNombre()}" required>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom: 10px;">
-                <label class="col-sm-2 col-form-label">Apellido</label>
+                <span class="col-sm-2 col-form-label">Apellido</span>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="apellido" placeholder="Apellido" value="${usu.getApellido()}" required>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom: 10px;">
-                <label class="col-sm-2 col-form-label">Contraseña</label>
+                <span class="col-sm-2 col-form-label">Contraseña</span>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" name="password" aria-describedby="passHelp" placeholder="Contraseña" value="${usu.getPass()}" required>
                     <small id="passHelp" class="form-text text-muted" style="margin-left: 13px;">Más de 8 caracteres</small>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom: 10px;">
-                <label class="col-sm-2 col-form-label">Correo</label>
+                <span class="col-sm-2 col-form-label">Correo</span>
                 <div class="col-sm-10">
                     <input type="email" class="form-control" name="correo" aria-describedby="emailHelp" placeholder="ejemplo@correo.com" value="${usu.getCorreo()}" required>
                     <small id="emailHelp" class="form-text text-muted" style="margin-left: 13px;">Comprobar el valor correcto</small>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom: 10px;">
-                <label class="col-sm-2 col-form-label">Dirección</label>
+                <span class="col-sm-2 col-form-label">Dirección</span>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="direccion" placeholder="Calle 1 Calle 2" value="${usu.getDireccion()}" required>
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom: 10px;">
-                <label class="col-sm-2 col-form-label">Teléfono</label>
+                <span class="col-sm-2 col-form-label">Teléfono</span>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="telefono" placeholder="+000 000 000 0000" value="${usu.getTelefono()}" required>
+                    <input type="tel" class="form-control control-telefonoE" name="telefono" value="${usu.getTelefono()}" required>
                 </div>
             </div>
             <div class="modal-footer">
@@ -61,5 +61,9 @@
             </div>
         </form>
     </body>
-    
+    <!-- Propios -->
+    <script>
+        var url = "js/editar.js";
+        $.getScript(url);
+    </script>
 </html>
