@@ -1,25 +1,28 @@
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Daniel
  */
 public class Habitacion {
 
-    private String id, hotelId, tipoId, codigo, capacidad, numeroDeCuartos, numeroDeAseos;
+    private String id, hotelId, claseId, codigo, detalles;
+    private int numeroDeCuartos;
+    private Date ultimoMantenimiento;
 
     public Habitacion() {
     }
 
-    public Habitacion(String id, String hotelId, String tipoId, String codigo, String capacidad, String numeroDeCuartos,
-            String numeroDeAseos) {
+    public Habitacion(String id, String hotelId, String claseId, String codigo, String detalles, int numeroDeCuartos, Date ultimoMantenimiento) {
         this.id = id;
         this.hotelId = hotelId;
-        this.tipoId = tipoId;
+        this.claseId = claseId;
         this.codigo = codigo;
-        this.capacidad = capacidad;
+        this.detalles = detalles;
         this.numeroDeCuartos = numeroDeCuartos;
-        this.numeroDeAseos = numeroDeAseos;
+        this.ultimoMantenimiento = ultimoMantenimiento;
     }
 
     public String getId() {
@@ -38,12 +41,12 @@ public class Habitacion {
         this.hotelId = hotelId;
     }
 
-    public String getTipoId() {
-        return tipoId;
+    public String getClaseId() {
+        return claseId;
     }
 
-    public void setTipoId(String tipoId) {
-        this.tipoId = tipoId;
+    public void setClaseId(String claseId) {
+        this.claseId = claseId;
     }
 
     public String getCodigo() {
@@ -54,28 +57,28 @@ public class Habitacion {
         this.codigo = codigo;
     }
 
-    public String getCapacidad() {
-        return capacidad;
+    public String getDetalles() {
+        return detalles;
     }
 
-    public void setCapacidad(String capacidad) {
-        this.capacidad = capacidad;
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
     }
 
-    public String getNumeroDeCuartos() {
+    public int getNumeroDeCuartos() {
         return numeroDeCuartos;
     }
 
-    public void setNumeroDeCuartos(String numeroDeCuartos) {
+    public void setNumeroDeCuartos(int numeroDeCuartos) {
         this.numeroDeCuartos = numeroDeCuartos;
     }
 
-    public String getNumeroDeAseos() {
-        return numeroDeAseos;
+    public Date getUltimoMantenimiento() {
+        return ultimoMantenimiento;
     }
 
-    public void setNumeroDeAseos(String numeroDeAseos) {
-        this.numeroDeAseos = numeroDeAseos;
+    public void setUltimoMantenimiento(Date ultimoMantenimiento) {
+        this.ultimoMantenimiento = ultimoMantenimiento;
     }
 
 }

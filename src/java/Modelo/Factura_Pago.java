@@ -1,24 +1,24 @@
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Daniel
  */
 public class Factura_Pago {
 
-    private String id, facturaId, pagoId, tipoPago, fecha, numeroDeTarjeta, titular;
+    private String id, facturaId, pagoId;
+    private Date facpagoFecha;
 
     public Factura_Pago() {
     }
 
-    public Factura_Pago(String id, String facturaId, String pagoId, String tipoPago, String fecha, String numeroDeTarjeta, String titular) {
+    public Factura_Pago(String id, String facturaId, String pagoId, Date facpagoFecha) {
         this.id = id;
         this.facturaId = facturaId;
         this.pagoId = pagoId;
-        this.tipoPago = tipoPago;
-        this.fecha = fecha;
-        this.numeroDeTarjeta = numeroDeTarjeta;
-        this.titular = titular;
+        this.facpagoFecha = facpagoFecha;
     }
 
     public String getId() {
@@ -45,36 +45,12 @@ public class Factura_Pago {
         this.pagoId = pagoId;
     }
 
-    public String getTipoPago() {
-        return tipoPago;
+    public Date getFacpagoFecha() {
+        return facpagoFecha;
     }
 
-    public void setTipoPago(String tipoPago) {
-        this.tipoPago = tipoPago;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getNumeroDeTarjeta() {
-        return numeroDeTarjeta;
-    }
-
-    public void setNumeroDeTarjeta(String numeroDeTarjeta) {
-        this.numeroDeTarjeta = numeroDeTarjeta;
-    }
-
-    public String getTitular() {
-        return titular;
-    }
-
-    public void setTitular(String titular) {
-        this.titular = titular;
+    public void setFacpagoFecha(Date facpagoFecha) {
+        this.facpagoFecha = facpagoFecha;
     }
 
 }

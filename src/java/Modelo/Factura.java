@@ -1,20 +1,26 @@
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Daniel
  */
 public class Factura {
 
-    private String id, codigo, total;
+    private String id, codigo, estadoDeFactura;
+    private Date fechaDeEmision;
+    private double montoTotal;
 
     public Factura() {
     }
 
-    public Factura(String id, String codigo, String total) {
+    public Factura(String id, String codigo, String estadoDeFactura, Date fechaDeEmision, double montoTotal) {
         this.id = id;
         this.codigo = codigo;
-        this.total = total;
+        this.estadoDeFactura = estadoDeFactura;
+        this.fechaDeEmision = fechaDeEmision;
+        this.montoTotal = montoTotal;
     }
 
     public String getId() {
@@ -33,12 +39,28 @@ public class Factura {
         this.codigo = codigo;
     }
 
-    public String getTotal() {
-        return total;
+    public String getEstadoDeFactura() {
+        return estadoDeFactura;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public void setEstadoDeFactura(String estadoDeFactura) {
+        this.estadoDeFactura = estadoDeFactura;
+    }
+
+    public Date getFechaDeEmision() {
+        return fechaDeEmision;
+    }
+
+    public void setFechaDeEmision(Date fechaDeEmision) {
+        this.fechaDeEmision = fechaDeEmision;
+    }
+
+    public double getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(double montoTotal) {
+        this.montoTotal = montoTotal;
     }
 
 }

@@ -1,18 +1,21 @@
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Daniel
  */
-public class Recepcionista {
+public class Empleado {
 
-    private String id, hotelId, nombre, apellido, pass, correo, direccion, telefono;
+    private String id, hotelId, nombre, apellido, pass, correo, direccion;
+    private double salario;
+    private Date fechaDeContratacion;
 
-    public Recepcionista() {
+    public Empleado() {
     }
 
-    public Recepcionista(String id, String hotelId, String nombre, String apellido, String pass, String correo,
-            String direccion, String telefono) {
+    public Empleado(String id, String hotelId, String nombre, String apellido, String pass, String correo, String direccion, double salario, Date fechaDeContratacion) {
         this.id = id;
         this.hotelId = hotelId;
         this.nombre = nombre;
@@ -20,7 +23,8 @@ public class Recepcionista {
         this.pass = pass;
         this.correo = correo;
         this.direccion = direccion;
-        this.telefono = telefono;
+        this.salario = salario;
+        this.fechaDeContratacion = fechaDeContratacion;
     }
 
     public String getId() {
@@ -79,12 +83,20 @@ public class Recepcionista {
         this.direccion = direccion;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public double getSalario() {
+        return salario;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public Date getFechaDeContratacion() {
+        return fechaDeContratacion;
+    }
+
+    public void setFechaDeContratacion(Date fechaDeContratacion) {
+        this.fechaDeContratacion = fechaDeContratacion;
     }
 
 }

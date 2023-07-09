@@ -6,17 +6,18 @@ package Modelo;
  */
 public class Hotel {
 
-    private String id, nombre, correo, direccion, telefono;
+    private String id, nombre, correo, direccion, telefono, pais;
 
     public Hotel() {
     }
 
-    public Hotel(String id, String nombre, String correo, String direccion, String telefono) {
+    public Hotel(String id, String nombre, String correo, String direccion, String telefono, String pais) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.pais = pais;
     }
 
     public String getId() {
@@ -57,6 +58,14 @@ public class Hotel {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 
 }
