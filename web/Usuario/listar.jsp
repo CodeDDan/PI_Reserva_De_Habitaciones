@@ -20,14 +20,20 @@
         <link rel="stylesheet" href="css/listar.css">
     </head>
     <body>
-        
-        <h1>Lista de usuarios registrados en la Base de Datos </h1>
+        <nav class="navbar navbar-dark bg-dark justify-content-between nav-principal">
+            <a class="navbar-brand nav-texto">Lista de usuarios registrados en la Base de Datos</a>
+            <form class="form-inline nav-formulario">
+                <div class="input-group controles-principales">
+                    <!-- Button trigger modal agregar -->
+                    <button type="button" class="btn btn-primary boton-agregar" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+                        Nuevo usuario
+                    </button>
+                    <input type="text" id="buscarInput" class="form-control" placeholder="Buscar...">
+                    <button type="button" class="btn btn-primary">Regresar </button>
+                </div>
+            </form>
+        </nav>
         <div class="contenedor-tabla">
-            <!-- Button trigger modal agregar -->
-            <button type="button" class="btn btn-primary boton-agregar" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-                Nuevo
-            </button>
-            <input type="text" id="buscarInput" placeholder="Buscar...">
             <table class="table table-striped table-hover table-sm tabla-personal">
                 <thead>
                     <tr>
@@ -110,6 +116,7 @@
                 </div>
             </div>
         </div>
+        
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <!-- Bootstrap -->
