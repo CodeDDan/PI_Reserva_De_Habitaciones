@@ -1,0 +1,19 @@
+/* 
+    Created on : 9 jul 2023, 22:23:27
+    Author     : Daniel
+*/
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Añade un espacio de 20px entre las tarjetas */
+    justify-content: space-around;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.card-container .card {
+    flex-basis: calc(33.33% - 1rem); /* Establece el ancho máximo de cada tarjeta */
+    min-width: 280px;
+    margin-bottom: 1rem; /* Agrega un espacio inferior entre las tarjetas */
+}

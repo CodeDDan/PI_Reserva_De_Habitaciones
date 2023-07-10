@@ -9,19 +9,17 @@ import java.util.Date;
 public class Habitacion {
 
     private String id, hotelId, claseId, codigo, detalles;
-    private int numeroDeCuartos;
     private Date ultimoMantenimiento;
 
     public Habitacion() {
     }
 
-    public Habitacion(String id, String hotelId, String claseId, String codigo, String detalles, int numeroDeCuartos, Date ultimoMantenimiento) {
+    public Habitacion(String id, String hotelId, String claseId, String codigo, String detalles, Date ultimoMantenimiento) {
         this.id = id;
         this.hotelId = hotelId;
         this.claseId = claseId;
         this.codigo = codigo;
         this.detalles = detalles;
-        this.numeroDeCuartos = numeroDeCuartos;
         this.ultimoMantenimiento = ultimoMantenimiento;
     }
 
@@ -63,14 +61,6 @@ public class Habitacion {
 
     public void setDetalles(String detalles) {
         this.detalles = detalles;
-    }
-
-    public int getNumeroDeCuartos() {
-        return numeroDeCuartos;
-    }
-
-    public void setNumeroDeCuartos(int numeroDeCuartos) {
-        this.numeroDeCuartos = numeroDeCuartos;
     }
 
     public Date getUltimoMantenimiento() {

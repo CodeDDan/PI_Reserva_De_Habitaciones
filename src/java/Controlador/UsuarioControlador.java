@@ -78,6 +78,7 @@ public class UsuarioControlador extends HttpServlet {
             acceso = edit;
         }
         // Usar las lineas siguientes genera un reenvío de formulario
+        // No procesar aquí los formularios
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }

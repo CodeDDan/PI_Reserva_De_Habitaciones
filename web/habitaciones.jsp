@@ -1,18 +1,22 @@
+<%-- 
+    Document   : habitaciones
+    Created on : 9 jul 2023, 20:50:25
+    Author     : Daniel
+--%>
+
+<%@page import="java.util.List"%>
+<%@page import="ModeloDAO.ModeloCombinadoDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
-        <title>Clientes</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--  Links para usar boostrap, es importante que estén primeros para no perder los estilos propios-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <!-- Es importante que la referencia esté correctamente indicada o no sirven los estilos -->
+        <title>Sanz Habitaciones</title>
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/habitaciones.css"/>
     </head>
     <body>
         <div class="header-container">
@@ -21,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <img src="iconos/Logo_hotel_base.png" alt="Hotel Sanz" class="imagen-logo">
                 </div>
                 <ul>
-                    <li><a href="#"><img src="iconos/icons8_downtown_50px.png" alt="Inicio" class="icono-header">Inicio</a></li>
+                    <li><a href="index.html"><img src="iconos/icons8_downtown_50px.png" alt="Inicio" class="icono-header">Inicio</a></li>
                     <li><a href="habitaciones.jsp"><img src="iconos/icons8_booking_50px.png" alt="Habitaciones" class="icono-header">Habitaciones</a></li>
                     <li><a href="#"><img src="iconos/icons8_people_50px.png" alt="Nosotros" class="icono-header">Sobre nosotros</a></li>
                     <li><a href="#"><img src="iconos/icons8_image_gallery_50px.png" alt="Galería" class="icono-header">Galería</a></li>
@@ -34,6 +38,54 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </li>
                 </ul>
             </header>
+        </div>
+        <div class="card-container">
+            <%
+                ModeloCombinadoDAO mcd = new ModeloCombinadoDAO();
+                List<String> detalles = mcd.detallesHabitaciones();
+                int count = 0;
+                for (String detalle : detalles) {
+                    if (count % 3 == 0 && count > 0) {
+            %>
+        </div>
+        <div class="card-container">
+            <% }
+                String[] elementos = detalle.split(", ");
+                String cardTitle = elementos[3];
+                String cardText = elementos[2];
+                String buttonLabel = "Tarifas desde " + elementos[5] + " $";
+            %>
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%= cardTitle%></h5>
+                    <p class="card-text"><%= cardText%></p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<%= count%>"><%= buttonLabel%></button>
+                </div>
+            </div>
+            <!-- Modal dinámico-->
+            <div class="modal fade" id="modal<%= count%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Aquí se modifica el tipo modal -->
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles <%= elementos[0]%></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Capacidad máxima <%= elementos[4]%></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" form="formulario-ingreso" class="btn btn-primary" id="btnSubmitIngresar" name="accion" value ="ingresar">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%
+                    count++;
+                }
+            %>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,28 +125,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </div>
             </div>
         </div>
-        <section class="principal">
-            <div class="texto-principal">
-                <h1>Hotel Sanz</h1>
-                <h2>Duerme como un rey, despierta como una estrella.</h2>
-            </div>
-        </section>
-        <section class="registro-rapido">
-            <div class="registro-botones">
-                <h1><button class="boton-registro">1 habitación, 1 persona</button></h1>
-            </div>
-        </section>
-        <h2>Hotel Sanz</h2>
-        <div class="seccion-fotos">
-            <img src="imagenes/hotel_1.jpg" alt="Hotel_1"/>
-            <img src="imagenes/hotel_2.jpg" alt="Hotel_2"/>
-            <img src="imagenes/hotel_3.jpg" alt="Hotel_3"/>
-            <img src="imagenes/hotel_4.jpg" alt="Hotel_4"/>
-            <img src="imagenes/hotel_5.jpg" alt="Hotel_5"/>
-            <img src="imagenes/hotel_6.jpg" alt="Hotel_6"/>
-            <img src="imagenes/hotel_7.jpg" alt="Hotel_7"/>
-        </div>
-        <div><a href="UsuarioControlador?accion=listar">Listar</a></div>
         <footer>
             <h3>©2023 Daniel Sánchez</h3>
             <h4>Proyecto Integrador de Reserva de Habitaciones - Todos los derechos reservados</h4>
@@ -108,7 +138,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </body>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/index.js"></script>
 </html>

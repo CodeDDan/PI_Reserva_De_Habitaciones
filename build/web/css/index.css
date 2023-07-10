@@ -1,7 +1,3 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
 /* 
     Created on : 26 jun 2023, 20:17:51
     Author     : Daniel
@@ -10,6 +6,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .modal-open {
     overflow: inherit !important;
     padding: 0 !important;
+}
+
+.header-container {
+    padding-bottom: 140px;
 }
 
 .top-header {
@@ -46,7 +46,7 @@ ul {
     margin: 0;
 }
 
-li {
+li a {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -55,7 +55,7 @@ li {
     transition: 0.5s;
 }
 
-header li:hover {
+header li a:hover {
     color: #FF7F00;
     transition: 0.5s;
     cursor: pointer;
@@ -122,6 +122,21 @@ header li:hover img {
     background-color: #FF7F00;
 }
 
+.btn-primary.btn-submitI {
+    background-color: #FF7F00;
+    border: 1px solid #FF7F00;
+    color: #fff;
+}
+
+.btn-primary.btn-submitI:hover, .btn-primary.btn-submitI:active, .btn-primary.btn-submitI:focus {
+    background-color: initial;
+}
+
+.btn-primary.btn-submitI:hover, btn-primary.btn-submitI:active {
+    border: 1px solid #E37100;
+    background-color: #E37100;
+}
+
 .principal {
     display: flex;
     justify-content: center;
@@ -130,7 +145,6 @@ header li:hover img {
 
 .texto-principal {
     text-align: center;
-    margin-top: 130px;
     margin-bottom: 10px;
     margin-left: 80px;
     margin-right: 80px;

@@ -21,10 +21,10 @@ import Interfaces.UsuarioCRUD;
  */
 public class UsuarioDAO implements UsuarioCRUD {
 
-    Conexion cn = new Conexion();
-    Connection con;
-    PreparedStatement ps;
-    ResultSet rs;
+    private final Conexion cn = new Conexion();
+    private Connection con;
+    private PreparedStatement ps;
+    private ResultSet rs;
 
     @Override
     public boolean add(Usuario usuario) {
@@ -41,7 +41,7 @@ public class UsuarioDAO implements UsuarioCRUD {
             ps.setString(6, usuario.getTelefono());
             ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error en la inserción" + e);
+            System.out.println("Error en la inserción de usuario" + e);
         }
         return false;
     }

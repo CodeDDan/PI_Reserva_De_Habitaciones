@@ -116,7 +116,7 @@
                 </div>
             </div>
         </div>
-        
+
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <!-- Bootstrap -->
@@ -124,7 +124,7 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-                                    var url = "js/listar.js";
-                                    $.getScript(url);
+        var url = "js/listar.js";
+        $.getScript(url);
     </script>
 </html>
