@@ -29,7 +29,7 @@
                         Nuevo usuario
                     </button>
                     <input type="text" id="buscarInput" class="form-control" placeholder="Buscar...">
-                    <button type="button" class="btn btn-primary">Regresar </button>
+                    <a type="button" class="btn btn-primary" href="index.html">Regresar </a>
                 </div>
             </form>
         </nav>

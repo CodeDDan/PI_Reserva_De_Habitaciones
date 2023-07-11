@@ -21,7 +21,7 @@
     width: 100%;
     min-width: 750px;
     border-bottom: 2px solid #bdc3c7;
-    z-index: 2;
+    z-index: 3;
 }
 
 .imagen-logo {

@@ -43,6 +43,7 @@
             <%
                 ModeloCombinadoDAO mcd = new ModeloCombinadoDAO();
                 List<String> detalles = mcd.detallesHabitaciones();
+                String imagenPrincipal = "";
                 int count = 0;
                 for (String detalle : detalles) {
                     if (count % 3 == 0 && count > 0) {
@@ -51,14 +52,78 @@
         <div class="card-container">
             <% }
                 String[] elementos = detalle.split(", ");
-                String cardTitle = elementos[3];
-                String cardText = elementos[2];
-                String buttonLabel = "Tarifas desde " + elementos[5] + " $";
+                String cardDetalle = elementos[2];
+                String cardTipo = elementos[3];
+                String cardText = elementos[4];
+                String capacidad = elementos[5];
+                String buttonLabel = "Tarifas desde " + elementos[6] + " $";
+
             %>
             <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <%                    
+                    int hab_Id = Integer.valueOf(elementos[0]);
+                    List<String> imagenes = mcd.imagenesHabitacion(hab_Id);
+                    String imgPath = "/PI_Reserva_De_Habitaciones/imagenes/hotel_2.jpg";
+                    if (imagenes.isEmpty()) {
+                        imagenPrincipal = "";
+                        imagenes.add(imgPath);
+                    }
+                %>
+                <!-- Aquí la imagen del card, se utiliza un carrousel-->
+                <div id="carousel<%=count%>" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <%
+                            int iter = 0;
+                            for (String imagen : imagenes) {
+                                if (iter == 0) {
+                                    imagenPrincipal = imagen;
+                        %>
+                        <button type="button" data-bs-target="#carousel<%= count%>" data-bs-slide-to="<%= iter%>" class="active" aria-current="true" aria-label="Slide <%= iter + 1%>"></button>
+                        <%
+                        } else {
+
+                        %>
+                        <button type="button" data-bs-target="#carousel<%= count%>" data-bs-slide-to="<%= iter%>" aria-label="<%= iter + 1%>"></button>
+                        <% }
+                                iter++;
+                            }
+                        %>
+                    </div>
+                    <div class="carousel-inner">
+                        <%
+                            int val = 0;
+                            for (String imagen : imagenes) {
+
+                                if (val == 0) {
+
+                        %>
+                        <div class="carousel-item active">
+                            <img src="<%=imagen%>" class="d-block w-100" onerror="this.src='/PI_Reserva_De_Habitaciones/imagenes/hotel_2.jpg';" alt="/PI_Reserva_De_Habitaciones/imagenes/hotel_2.jpg" style="width: 100%; height: 220px; object-fit: cover;">
+                        </div>
+                        <% } else {
+
+                        %>
+                        <div class="carousel-item">
+                            <img src="<%=imagen%>" class="d-block w-100" onerror="this.src='/PI_Reserva_De_Habitaciones/imagenes/hotel_2.jpg';" alt="/PI_Reserva_De_Habitaciones/imagenes/hotel_2.jpg" style="width: 100%; height: 220px; object-fit: cover;">
+                        </div>
+                        <%                        }
+                                val++;
+                            }
+                        %>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel<%=count%>" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel<%=count%>" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- Aquí termina el carrousel, se usa comunmente es: -->
+                <!--img src="..." class="card-img-top" alt="..." style="width: 100%; height: 220px; object-fit: cover;"-->
                 <div class="card-body">
-                    <h5 class="card-title"><%= cardTitle%></h5>
+                    <h5 class="card-title"><%= cardTipo%></h5>
                     <p class="card-text"><%= cardText%></p>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<%= count%>"><%= buttonLabel%></button>
                 </div>
@@ -69,15 +134,22 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles <%= elementos[0]%></h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h5>Capacidad máxima <%= elementos[4]%></h5>
+                            <img src="<%=imagenPrincipal%>" class="d-block w-100" onerror="this.src='/PI_Reserva_De_Habitaciones/imagenes/hotel_2.jpg';" style="width: 100%; height: 220px; object-fit: cover; border-radius: 10px;">
+                            <div style="margin-top: 10px;"></div>
+                            <h4 style="text-align: center;">Habitación <%= cardTipo%></h4>
+                            <div style="border-bottom: 1px solid #bdc3c7; margin: 5px 0;"></div>
+                            <h5 style="color: #555; margin-top: 10px;">Aspectos importantes</h5>
+                            <h7><%= cardDetalle%></h7>
+                            <div style="margin-top: 10px;"></div>
+                            <h6>Capacidad máxima <%= capacidad%> persona/s</h6>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" form="formulario-ingreso" class="btn btn-primary" id="btnSubmitIngresar" name="accion" value ="ingresar">Reservar</button>
+                            <button type="submit" form="formulario-ingreso" class="btn btn-primary" name="accion" value ="ingresar">Reservar</button>
                         </div>
                     </div>
                 </div>
@@ -138,4 +210,7 @@
     </body>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/index.js"></script>
 </html>
