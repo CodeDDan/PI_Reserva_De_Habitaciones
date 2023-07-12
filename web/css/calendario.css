@@ -1,0 +1,204 @@
+/* 
+    Created on : 11 jul 2023, 13:57:43
+    Author     : Daniel
+*/
+
+.date-picker {
+    /* Posicionamiento en el HTML */
+    /* margin: 200px auto; */
+    width: 240px;
+    height: 50px;
+    background: #fff; /* Color del input */
+    border: 2px solid #000; /* Borde del selector */
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s 0s ease-in-out;
+    z-index: 1;
+}
+
+.date-picker.open {
+    border: 2px solid #FF7F00;
+    max-height: 400px;
+}
+
+.date-picker:hover {
+    border: 2px solid #FF7F00;
+    box-shadow: 3px 3px 3px -3px rgba(255, 127, 0, 0.75);
+    z-index: 2;
+}
+
+.date-picker .input {
+    width: 100%;
+    height: 47px; /* Aquí se controla el tamaño cuando está abierto*/
+    font-size: 0;
+    cursor: pointer;
+    border-radius: 8px; /* Borde para el overlay*/
+    position: relative;
+    z-index: 3;
+}
+
+.date-picker .input:hover,
+.date-picker .input:hover button {
+    background: #FFF; /* Hover del botón y del encabezado */
+}
+
+.date-picker .input button {
+    width: 50px;
+    height: 47px; /* Aquí se controla el tamaño del botón abierto*/
+    background-color: #FFF; /* Color del botón */
+    color: white;
+    line-height: 50px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 0;
+}
+
+.date-picker.open .input button {
+    background: #FFF;/* Color del botón activo */
+}
+
+.date-picker .input .result,
+.date-picker .input button {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.date-picker .input .result {
+    width: calc(100% - 50px);
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 0 8px 8px 0;
+    color: #555; /* Color del texto del resultado */
+    box-sizing: border-box;
+    position: relative;
+    z-index: 4;
+}
+
+.date-picker .calendar {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #F7F7F7; /* Color de fondo del calendario */
+    border-radius: 0;
+}
+
+.date-picker .ui-datepicker-inline {
+    position: relative;
+    width: 100%;
+}
+
+.date-picker .ui-datepicker-header {
+    height: 100%;
+    line-height: 50px;
+    /* Color del encabezado abierto */
+    background: #FF7F00;
+    /* Radio del encabezado con el calendario abierto */
+    border-radius: 0;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.date-picker .ui-datepicker-prev,
+.date-picker .ui-datepicker-next {
+    width: 20px;
+    height: 20px;
+    /* Color del borde del botón */
+    border: 2px solid #fff;
+    border-radius: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.date-picker .ui-datepicker-prev {
+    float: left;
+    margin-left: 12px;
+}
+
+.date-picker .ui-datepicker-prev:after {
+    transform: rotate(45deg);
+    margin: -43px 0px 0px 8px;
+}
+
+.date-picker .ui-datepicker-next {
+    float: right;
+    margin-right: 12px;
+}
+
+.date-picker .ui-datepicker-next:after {
+    transform: rotate(-135deg);
+    margin: -43px 0px 0px 6px;
+}
+
+.date-picker .ui-datepicker-prev:after,
+.date-picker .ui-datepicker-next:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 4px;
+    height: 4px;
+    /* Color de los botones */
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.date-picker .ui-datepicker-prev:hover,
+.date-picker .ui-datepicker-next:hover,
+.date-picker .ui-datepicker-prev:hover:after,
+.date-picker .ui-datepicker-next:hover:after {
+    border-color: #333;
+}
+
+.date-picker .ui-datepicker-title {
+    text-align: center;
+}
+
+.date-picker .ui-datepicker-calendar {
+    width: 100%;
+    text-align: center;
+}
+
+.date-picker .ui-datepicker-calendar thead tr th span {
+    display: block;
+    width: 100%;
+    /* Color de los días del calendario */
+    color: #000;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.date-picker .ui-state-default {
+    display: block;
+    text-decoration: none;
+    /* Color de las letras del calendario */
+    color: #000;
+    line-height: 40px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.date-picker .ui-state-default:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.date-picker .ui-state-highlight {
+    color: #68768A;
+}
+
+.date-picker .ui-state-active {
+    color: #B95C00;
+    background-color: rgba(131, 146, 167, 0.12);
+    font-weight: 600;
+}
+
+.date-picker .ui-datepicker-unselectable .ui-state-default {
+    /* Color de los días que no se pueden seleccionar */
+    color: #222;
+    border: 2px solid transparent;
+}

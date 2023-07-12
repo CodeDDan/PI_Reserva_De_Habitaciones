@@ -39,6 +39,22 @@
                 </ul>
             </header>
         </div>
+        <div class="contenedor-texto-inicial">
+            <div class="texto-inicial">
+                Su estadía con Hotel Sanz incluye los siguientes servicios
+            </div>
+        </div>
+        <div class="contenedor-lista">
+            <ul class="lista-servicios">
+                <li><img src="iconos/icons8-garage-50.png" alt="Inicio" class="icono-header">Estacionamiento</li>
+                <li><img src="iconos/icons8-wifi-50.png" alt="Inicio" class="icono-header">WiFi</li>
+                <li><img src="iconos/icons8-poolside-bar-50.png" alt="Inicio" class="icono-header">Restaurante</li>
+                <li><img src="iconos/icons8-pool-50.png" alt="Inicio" class="icono-header">Piscina al aire libre</li>
+                <li><img src="iconos/icons8-gym-50.png" alt="Inicio" class="icono-header">Gimnasio</li>
+                <li><img src="iconos/icons8-pets-50.png" alt="Inicio" class="icono-header">Habitación para mascotas</li>
+                <li><img src="iconos/icons8-meeting-room-50.png" alt="Inicio" class="icono-header">Centro de negocios</li>
+            </ul>
+        </div>
         <div class="card-container">
             <%
                 ModeloCombinadoDAO mcd = new ModeloCombinadoDAO();
@@ -60,8 +76,7 @@
 
             %>
             <div class="card">
-                <%                    
-                    int hab_Id = Integer.valueOf(elementos[0]);
+                <%                    int hab_Id = Integer.valueOf(elementos[0]);
                     List<String> imagenes = mcd.imagenesHabitacion(hab_Id);
                     String imgPath = "/PI_Reserva_De_Habitaciones/imagenes/hotel_2.jpg";
                     if (imagenes.isEmpty()) {

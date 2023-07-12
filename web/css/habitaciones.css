@@ -17,3 +17,33 @@
     min-width: 280px;
     margin-bottom: 1rem; /* Agrega un espacio inferior entre las tarjetas */
 }
+
+.contenedor-texto-inicial {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+.contenedor-lista .lista-servicios {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    text-align: center;
+    margin: 20px 20px;
+}
+
+ul.lista-servicios {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.lista-servicios li {
+    display: flex;
+    flex-direction: column;
+    /* justify-content alinea los objetos en el eje y, dado que se cambia la dirección del flex, lo hace ne el eje x*/
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}

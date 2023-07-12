@@ -41,6 +41,7 @@
 ul {
     list-style: none;
     display: flex;
+    align-items: center;
     gap: 30px;
     font-size: 16px;
     margin: 0;
@@ -74,6 +75,7 @@ header li:hover img {
 
 .barra-vertical {
     border-left: 1px solid #000;
+    height: 62px;
 }
 
 .icono-header {
@@ -164,9 +166,47 @@ section h2 {
 }
 
 .registro-rapido {
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 18px 0;
 }
 
+.registro-rapido-acciones {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.boton-registro-rapido {
+    /* Para que al usar pseudo-objetos el elemento se ubique relativo a este*/
+    position: relative;
+    top: 0;
+    left: 0;
+    background: #FFF;
+    border: 2px solid #FF7F00;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #FF7F00;
+    padding: 12px 8px;
+    border-radius: 30px;
+    /* Debemos colocar una transición específica para que las posiciones no transicionen*/
+    transition: 0.5s;
+}
+
+.boton-registro-rapido:hover {
+    /* Aqui controlamos la forma y color de nuestra primera animacion*/
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 2px var(--colorHoverAnim3),
+        0 0 1px var(--colorHoverAnim3),
+        0 0 -1px var(--colorHoverAnim2),
+        0 0 -2px var(--colorHoverAnim1);
+    border: 2px solid transparent;
+    border-radius: 30px;
+    background-color: #FF7F00;
+    color: #FFF;
+}
 
 .seccion-fotos {
     display: flex;
