@@ -85,7 +85,7 @@
                     }
                 %>
                 <!-- Aquí la imagen del card, se utiliza un carrousel-->
-                <div id="carousel<%=count%>" class="carousel slide">
+                <div id="carousel<%=count%>" class="carousel slide" data-bs-ride="carousel"> <!-- Puede generar problemas data-bs-ride="carousel"-->
                     <div class="carousel-indicators">
                         <%
                             int iter = 0;

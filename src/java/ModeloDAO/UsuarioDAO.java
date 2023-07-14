@@ -130,4 +130,23 @@ public class UsuarioDAO implements UsuarioCRUD {
         return usu;
     }
 
+    public int comprobarUsuario(String correo, String password) {
+        String sql;
+        sql = "SELECT usu_Id FROM usuario WHERE usu_Correo = ? AND usu_Password = ?";
+        int usu_Id = 0;
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, correo);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                usu_Id = rs.getInt("usu_Id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en la búsqueda de usuario" + e);
+        }
+        return usu_Id;
+    }
+
 }

@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -18,6 +19,10 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "UsuarioControlador", urlPatterns = {"/UsuarioControlador"})
 public class UsuarioControlador extends HttpServlet {
 
+    //Direcciones de nuestros archivos, usar direcciones absolutas para evitar problemas
+    String vistaUsu = "/PI_Reserva_De_Habitaciones/dashboard.html";
+    String vistaEmp = "/PI_Reserva_De_Habitaciones/dashboardempe.html";
+    String index = "/PI_Reserva_De_Habitaciones/index.jsp";
     String listar = "Usuario/listar.jsp";
     String add = "Usuario/agregar.jsp";
     String edit = "Usuario/editar.jsp";
@@ -94,9 +99,44 @@ public class UsuarioControlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("accion");
 
-        if (action.equalsIgnoreCase("agregar_usuario")) {
+        // Esta variable sesion puede almacenar múltiples atributos
+        HttpSession session = request.getSession();
+        int intentosRestantes = 3; // Valor inicial de intentos restantes
+
+        if (session.getAttribute("intentosRestantes") != null) {
+            intentosRestantes = (int) session.getAttribute("intentosRestantes");
+        } else {
+            session.setAttribute("intentosRestantes", intentosRestantes);
+        }
+
+        String action = request.getParameter("accion");
+        System.out.println("Estoy en el método doPost()");
+        if (action.equalsIgnoreCase("ingresar")) {
+            String correo = request.getParameter("correo");
+            String password = request.getParameter("password");
+            int usu_Id = usuDao.comprobarUsuario(correo, password);
+            if ( usu_Id != 0) {
+                usuario = usuDao.list(usu_Id);
+                session.setAttribute("usuario", usuario);
+                response.sendRedirect(index);
+            } else {
+                intentosRestantes--;
+
+                if (intentosRestantes > 0) {
+                    session.setAttribute("error", "Usuario o contraseña incorrectos, intentos restantes: " + intentosRestantes);
+                } else {
+                    session.setAttribute("error", "Usuario bloqueado. Contacte al administrador.");
+                    // Aquí podemos agregar la vista del error
+                }
+                session.setAttribute("intentosRestantes", intentosRestantes);
+                response.sendRedirect(index);
+            }
+            return;
+        } else if (action.equalsIgnoreCase("ingresar-Empleado")) {
+            response.sendRedirect(vistaEmp);
+            return;
+        } else if (action.equalsIgnoreCase("agregar_usuario")) {
             String usu_Nombre = request.getParameter("nombre");
             String usu_Apellido = request.getParameter("apellido");
             String usu_Password = request.getParameter("password");
