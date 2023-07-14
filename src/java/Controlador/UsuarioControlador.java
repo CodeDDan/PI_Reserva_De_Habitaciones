@@ -116,9 +116,10 @@ public class UsuarioControlador extends HttpServlet {
             String correo = request.getParameter("correo");
             String password = request.getParameter("password");
             int usu_Id = usuDao.comprobarUsuario(correo, password);
-            if ( usu_Id != 0) {
+            if (usu_Id != 0) {
                 usuario = usuDao.list(usu_Id);
                 session.setAttribute("usuario", usuario);
+                session.removeAttribute("error"); // Eliminar el atributo "error"
                 response.sendRedirect(index);
             } else {
                 intentosRestantes--;
@@ -128,6 +129,8 @@ public class UsuarioControlador extends HttpServlet {
                 } else {
                     session.setAttribute("error", "Usuario bloqueado. Contacte al administrador.");
                     // Aquí podemos agregar la vista del error
+                     response.sendRedirect("https://www.google.com");
+                     return;
                 }
                 session.setAttribute("intentosRestantes", intentosRestantes);
                 response.sendRedirect(index);

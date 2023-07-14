@@ -19,26 +19,7 @@
         <link rel="stylesheet" href="css/habitaciones.css"/>
     </head>
     <body>
-        <div class="header-container">
-            <header class="top-header">
-                <div>
-                    <img src="iconos/Logo_hotel_base.png" alt="Hotel Sanz" class="imagen-logo">
-                </div>
-                <ul>
-                    <li><a href="index.html"><img src="iconos/icons8_downtown_50px.png" alt="Inicio" class="icono-header">Inicio</a></li>
-                    <li><a href="habitaciones.jsp"><img src="iconos/icons8_booking_50px.png" alt="Habitaciones" class="icono-header">Habitaciones</a></li>
-                    <li><a href="#"><img src="iconos/icons8_people_50px.png" alt="Nosotros" class="icono-header">Sobre nosotros</a></li>
-                    <li><a href="#"><img src="iconos/icons8_image_gallery_50px.png" alt="Galería" class="icono-header">Galería</a></li>
-                    <li class="barra-vertical"></li>
-                    <li><button class="boton-registro" onclick="location.href = 'Controlador?accion=registro'">Registrarse</button></li>
-                    <li><!-- Button trigger modal -->
-                        <button type="button" class="boton-iniciar" data-bs-toggle="modal" data-bs-target="#modalRegistro">
-                            Iniciar Sesión
-                        </button>
-                    </li>
-                </ul>
-            </header>
-        </div>
+        <jsp:include page="header.jsp" />
         <div class="contenedor-texto-inicial">
             <div class="texto-inicial">
                 Su estadía con Hotel Sanz incluye los siguientes servicios
@@ -227,5 +208,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Se debe agregar el index.js porque contiene el script para la función del switch para empleado-->
     <script src="js/index.js"></script>
 </html>
