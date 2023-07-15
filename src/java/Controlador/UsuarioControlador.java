@@ -113,8 +113,8 @@ public class UsuarioControlador extends HttpServlet {
         String action = request.getParameter("accion");
         System.out.println("Estoy en el método doPost()");
         if (action.equalsIgnoreCase("ingresar")) {
-            String correo = request.getParameter("correo");
-            String password = request.getParameter("password");
+            String correo = request.getParameter("correo-ingreso");
+            String password = request.getParameter("password-ingreso");
             int usu_Id = usuDao.comprobarUsuario(correo, password);
             if (usu_Id != 0) {
                 usuario = usuDao.list(usu_Id);
@@ -129,8 +129,8 @@ public class UsuarioControlador extends HttpServlet {
                 } else {
                     session.setAttribute("error", "Usuario bloqueado. Contacte al administrador.");
                     // Aquí podemos agregar la vista del error
-                     response.sendRedirect("https://www.google.com");
-                     return;
+                    response.sendRedirect("https://www.google.com");
+                    return;
                 }
                 session.setAttribute("intentosRestantes", intentosRestantes);
                 response.sendRedirect(index);
@@ -140,6 +140,7 @@ public class UsuarioControlador extends HttpServlet {
             response.sendRedirect(vistaEmp);
             return;
         } else if (action.equalsIgnoreCase("agregar_usuario")) {
+            String origen = request.getParameter("origen");
             String usu_Nombre = request.getParameter("nombre");
             String usu_Apellido = request.getParameter("apellido");
             String usu_Password = request.getParameter("password");
@@ -153,6 +154,11 @@ public class UsuarioControlador extends HttpServlet {
             usuario.setDireccion(usu_Direccion);
             usuario.setTelefono(usu_Telefono);
             usuDao.add(usuario);
+            if (origen != null && origen.equalsIgnoreCase("registro")) {
+                session.setAttribute("ingreso-exitoso", "Puede iniciar sesión");
+                response.sendRedirect(index);
+                return;
+            }
         } else if (action.equalsIgnoreCase("actualizar")) {
             String usu_Nombre = request.getParameter("nombre");
             String usu_Apellido = request.getParameter("apellido");

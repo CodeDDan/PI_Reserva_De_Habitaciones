@@ -5,6 +5,7 @@
 --%>
 <%-- Libreria importante para uso de jstl, permite que el código de la página sea más legible--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="css/header.css"/>
 <div class="header-container">
     <header class="top-header">
         <div>
@@ -51,11 +52,11 @@
                 <form id="formulario-ingreso" action="UsuarioControlador" method="post">
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo</label>
-                        <input type="text" class="form-control" id="email" name="correo" placeholder="Ingresa tu correo" autocomplete="on" required>
+                        <input type="text" class="form-control" id="email" name="correo-ingreso" placeholder="Ingresa tu correo" autocomplete="on" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña" autocomplete="off" required>
+                        <input type="password" class="form-control" id="password" name="password-ingreso" placeholder="Ingresa tu contraseña" autocomplete="off" required>
                     </div>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="switch-Empleado">
@@ -64,7 +65,7 @@
                     <div class="collapse" id="collapse-Empleado">
                         <div class="mb-3" style="margin-top: 10px;">
                             <label for="name" class="form-label">Nombre</label>
-                            <input type="password" class="form-control" id="name" name="nombre" placeholder="Ingresa tu nombre" autocomplete="on">
+                            <input type="password" class="form-control" id="name" name="nombre-ingreso" placeholder="Ingresa tu nombre" autocomplete="on">
                         </div>
                     </div>
                 </form>

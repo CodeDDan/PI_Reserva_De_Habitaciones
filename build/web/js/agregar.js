@@ -8,6 +8,7 @@ function actualizarBotonEnvio() {
             $('input[name="direccion"]').val() === '' ||
             $('input[name="telefono"]').val() === '';
 
+    console.log('condición:', hayCamposInvalidos || hayCamposVacios);
     if (hayCamposInvalidos || hayCamposVacios) {
         $('button[name="accion"][value="agregar_usuario"]').attr('disabled', 'disabled');
     } else {

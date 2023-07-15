@@ -37,6 +37,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <% }%>
+        <% if (session.getAttribute("ingreso-exitoso") != null) {%>
+        <div class="alert alert-primary alert-dismissible fade show alerta-personalizada" role="alert">
+            <strong>Cuenta creada!</strong> <%= session.getAttribute("ingreso-exitoso")%>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <%
+                session.removeAttribute("ingreso-exitoso");
+            %>
+        </div>
+        <% }%>
         <section class="principal">
             <div class="texto-principal">
                 <div style="font-size: 30px; padding: 2px 0;">Hotel Sanz</div>
