@@ -143,12 +143,14 @@ public class UsuarioControlador extends HttpServlet {
             String origen = request.getParameter("origen");
             String usu_Nombre = request.getParameter("nombre");
             String usu_Apellido = request.getParameter("apellido");
+            String usu_DNI = request.getParameter("dni");
             String usu_Password = request.getParameter("password");
             String usu_Correo = request.getParameter("correo");
             String usu_Direccion = request.getParameter("direccion");
             String usu_Telefono = request.getParameter("telefono");
             usuario.setNombre(usu_Nombre);
             usuario.setApellido(usu_Apellido);
+            usuario.setDni(usu_DNI);
             usuario.setPass(usu_Password);
             usuario.setCorreo(usu_Correo);
             usuario.setDireccion(usu_Direccion);
@@ -162,6 +164,7 @@ public class UsuarioControlador extends HttpServlet {
         } else if (action.equalsIgnoreCase("actualizar")) {
             String usu_Nombre = request.getParameter("nombre");
             String usu_Apellido = request.getParameter("apellido");
+            String usu_DNI = request.getParameter("dni");
             String usu_Password = request.getParameter("password");
             String usu_Correo = request.getParameter("correo");
             String usu_Direccion = request.getParameter("direccion");
@@ -169,6 +172,7 @@ public class UsuarioControlador extends HttpServlet {
             usuario.setId(request.getParameter("id_edit"));
             usuario.setNombre(usu_Nombre);
             usuario.setApellido(usu_Apellido);
+            usuario.setDni(usu_DNI);
             usuario.setPass(usu_Password);
             usuario.setCorreo(usu_Correo);
             usuario.setDireccion(usu_Direccion);

@@ -1,8 +1,10 @@
+// A pesar de que sea igual a agregar.js, se debe hacer otro para evitar problemas con intelInput
 // Control de envío
 function actualizarBotonEnvio() {
     var hayCamposInvalidos = $('input.is-invalid').length > 0;
     var hayCamposVacios = $('input[name="nombre"]').val() === '' ||
             $('input[name="apellido"]').val() === '' ||
+            $('input[name="dni"]').val() === '' ||
             $('input[name="correo"]').val() === '' ||
             $('input[name="password"]').val() === '' ||
             $('input[name="direccion"]').val() === '' ||
@@ -48,6 +50,38 @@ $('input[name="nombre"], input[name="apellido"]').on('keypress', function (event
     }
 });
 
+$('input[name="dni"]').on('input', function () {
+    var dniValue = $(this).val();
+    // Expresión para validar la cédula ecuatoriana ? 
+    var dniValido = /^[0-9]{10}$/.test(dniValue);
+
+    if (dniValido) {
+        $(this).removeClass('is-invalid');
+        $(this).addClass('is-valid');
+    } else {
+        $(this).removeClass('is-valid');
+        $(this).addClass('is-invalid');
+    }
+
+    actualizarBotonEnvio();
+});
+
+// Agregar un event listener para el evento 'input'
+$('input[name="correo"]').on('input', function () {
+    // Validar el valor del correo utilizando una expresión regular
+    var correo = $(this).val();
+    var correoValido = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/.test(correo);
+    // Agregar o quitar las clases de Bootstrap según la validez del correo
+    if (correoValido) {
+        $(this).removeClass('is-invalid');
+        $(this).addClass('is-valid');
+    } else {
+        $(this).removeClass('is-valid');
+        $(this).addClass('is-invalid');
+    }
+    actualizarBotonEnvio();
+});
+
 // Agregar un event listener para el evento 'input'
 $('input[name="password"]').on('input', function () {
     // Validar el valor de la contraseña utilizando expresiones regulares
@@ -61,22 +95,6 @@ $('input[name="password"]').on('input', function () {
 
     // Agregar o quitar las clases de Bootstrap según la validez de la contraseña
     if (longitudValida && complejidadValida) {
-        $(this).removeClass('is-invalid');
-        $(this).addClass('is-valid');
-    } else {
-        $(this).removeClass('is-valid');
-        $(this).addClass('is-invalid');
-    }
-    actualizarBotonEnvio();
-});
-
-// Agregar un event listener para el evento 'input'
-$('input[name="correo"]').on('input', function () {
-    // Validar el valor del correo utilizando una expresión regular
-    var correo = $(this).val();
-    var correoValido = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/.test(correo);
-    // Agregar o quitar las clases de Bootstrap según la validez del correo
-    if (correoValido) {
         $(this).removeClass('is-invalid');
         $(this).addClass('is-valid');
     } else {

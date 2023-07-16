@@ -40,6 +40,7 @@
                         <th scope="col">Código</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
+                        <th scope="col">Dni</th>
                         <th scope="col">Contraseña</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Direccion</th>
@@ -60,6 +61,7 @@
                         <th scope="row"><%= usu.getId()%></th>
                         <td><%= usu.getNombre()%></td>
                         <td><%= usu.getApellido()%></td>
+                        <td><%= usu.getDni()%></td>
                         <td><%= usu.getPass()%></td>
                         <td><%= usu.getCorreo()%></td>
                         <td><%= usu.getDireccion()%></td>

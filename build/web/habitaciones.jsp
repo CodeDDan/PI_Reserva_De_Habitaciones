@@ -49,6 +49,7 @@
         <div class="card-container">
             <% }
                 String[] elementos = detalle.split(", ");
+                String habitacionId = elementos[0];
                 String cardDetalle = elementos[2];
                 String cardTipo = elementos[3];
                 String cardText = elementos[4];
@@ -144,8 +145,11 @@
                             <h6>Capacidad máxima <%= capacidad%> persona/s</h6>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" form="formulario-ingreso" class="btn btn-primary" name="accion" value ="ingresar">Reservar</button>
+                            <form action="ReservaControlador">
+                                <input type="hidden" name="habitacion-id" value="<%= habitacionId%>">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary" name="accion" value="reservar">Reservar</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -155,44 +159,7 @@
                 }
             %>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <!-- Aquí se modifica el tipo modal -->
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar Sesión</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formulario-ingreso" action="AccesoControlador" method="post">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Correo</label>
-                                <input type="text" class="form-control" id="email" name="correo" placeholder="Ingresa tu correo" autocomplete="on" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu contraseña" autocomplete="off" required>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="switch-Empleado">
-                                <label class="form-check-label label-Empleado" for="switch-Empleado" style="margin-left: 20px;">Empleado</label>
-                            </div>
-                            <div class="collapse" id="collapse-Empleado">
-                                <div class="mb-3" style="margin-top: 10px;">
-                                    <label for="name" class="form-label">Nombre</label>
-                                    <input type="password" class="form-control" id="name" name="nombre" placeholder="Ingresa tu nombre" autocomplete="on">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" form="formulario-ingreso" class="btn btn-primary btn-submitI" id="btnSubmitIngresar" name="accion" value ="ingresar">Ingresar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <footer>
             <h3>©2023 Daniel Sánchez</h3>
             <h4>Proyecto Integrador de Reserva de Habitaciones - Todos los derechos reservados</h4>
@@ -204,10 +171,10 @@
             </ul>
         </footer>
     </body>
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <!-- Se debe agregar el index.js porque contiene el script para la función del switch para empleado-->
     <script src="js/index.js"></script>
 </html>

@@ -49,14 +49,26 @@
                 </div>
             </div>
             <div class="form-group row" style="margin-bottom: 10px; height: 54px;">
+                <span class="col-sm-2 col-form-label">DNI</span>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="dni" aria-describedby="dniHelp" placeholder="DNI" required>
+                    <div class="invalid-feedback">
+                        Ingrese un DNI mayor a 10 números
+                    </div>
+                    <div class="valid-feedback">
+                        Luce bien!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-bottom: 10px; height: 54px;">
                 <span class="col-sm-2 col-form-label">Contraseña</span>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" name="password" aria-describedby="passHelp" placeholder="Contraseña" required>
                     <div class="invalid-feedback">
-                        Contraseña mayor a 8 caracteres, al menos 1 dígito y una letra mayúscula
+                        Mayor a 8 caractéres, con al menos 1 dígito, mayúscula y minúscula
                     </div>
                     <div class="valid-feedback">
-                        Luce bien!
+                        Contraseña correcta!
                     </div>
                 </div>
             </div>

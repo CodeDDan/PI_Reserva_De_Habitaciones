@@ -1,19 +1,16 @@
-// A pesar de que sea igual a agregar.js, se debe hacer otro para evitar problemas con intelInput
 // Control de envío
 function actualizarBotonEnvio() {
     var hayCamposInvalidos = $('input.is-invalid').length > 0;
     var hayCamposVacios = $('input[name="nombre"]').val() === '' ||
             $('input[name="apellido"]').val() === '' ||
-            $('input[name="dni"]').val() === '' ||
             $('input[name="correo"]').val() === '' ||
-            $('input[name="password"]').val() === '' ||
             $('input[name="direccion"]').val() === '' ||
             $('input[name="telefono"]').val() === '';
 
     if (hayCamposInvalidos || hayCamposVacios) {
-        $('button[name="accion"][value="actualizar"]').attr('disabled', 'disabled');
+        $('button[name="accion"][value="pagar"]').attr('disabled', 'disabled');
     } else {
-        $('button[name="accion"][value="actualizar"]').removeAttr('disabled');
+        $('button[name="accion"][value="pagar"]').removeAttr('disabled');
     }
 }
 
@@ -50,22 +47,6 @@ $('input[name="nombre"], input[name="apellido"]').on('keypress', function (event
     }
 });
 
-$('input[name="dni"]').on('input', function () {
-    var dniValue = $(this).val();
-    // Expresión para validar la cédula ecuatoriana ? 
-    var dniValido = /^[0-9]{10}$/.test(dniValue);
-
-    if (dniValido) {
-        $(this).removeClass('is-invalid');
-        $(this).addClass('is-valid');
-    } else {
-        $(this).removeClass('is-valid');
-        $(this).addClass('is-invalid');
-    }
-
-    actualizarBotonEnvio();
-});
-
 // Agregar un event listener para el evento 'input'
 $('input[name="correo"]').on('input', function () {
     // Validar el valor del correo utilizando una expresión regular
@@ -73,28 +54,6 @@ $('input[name="correo"]').on('input', function () {
     var correoValido = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/.test(correo);
     // Agregar o quitar las clases de Bootstrap según la validez del correo
     if (correoValido) {
-        $(this).removeClass('is-invalid');
-        $(this).addClass('is-valid');
-    } else {
-        $(this).removeClass('is-valid');
-        $(this).addClass('is-invalid');
-    }
-    actualizarBotonEnvio();
-});
-
-// Agregar un event listener para el evento 'input'
-$('input[name="password"]').on('input', function () {
-    // Validar el valor de la contraseña utilizando expresiones regulares
-    var contrasena = $(this).val();
-
-    // Verificar la longitud mínima
-    var longitudValida = contrasena.length >= 8;
-
-    // Verificar la complejidad y combinación de mayúsculas, minúsculas y números
-    var complejidadValida = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(contrasena);
-
-    // Agregar o quitar las clases de Bootstrap según la validez de la contraseña
-    if (longitudValida && complejidadValida) {
         $(this).removeClass('is-invalid');
         $(this).addClass('is-valid');
     } else {
@@ -121,10 +80,60 @@ $('input[name="direccion"]').on('input', function () {
     actualizarBotonEnvio();
 });
 
+$('input[name="monto-pago"]').on('input', function () {
+    var montoPagar = parseFloat($(this).val());
+    var precioTotal = parseFloat($('input[name="precio-total"]').val());
+    // Verificar que el monto sea mayor de 30 y no exceda el precio total
+    var montoValido = montoPagar >= 30 && montoPagar <= precioTotal;
+
+    if (montoValido) {
+        $(this).removeClass('is-invalid');
+        $(this).addClass('is-valid');
+    } else {
+        $(this).removeClass('is-valid');
+        $(this).addClass('is-invalid');
+    }
+
+    actualizarBotonEnvio();
+});
+
+$(document).ready(function () {
+
+    $('#modalPago').on('shown.bs.modal', function () {
+        $('input[name="monto-pago"]').val($('input[name="precio-total"]').val());
+
+        var montoMinimo = 30;
+        var precioTotal = parseFloat($('input[name="precio-total"]').val());
+        var montoPagarInput = $('input[name="monto-pago"]');
+
+        // Establecer el valor máximo y mínimo en el campo montoPagar
+        montoPagarInput.attr('min', montoMinimo);
+        montoPagarInput.attr('max', precioTotal);
+    });
+
+});
+
+
+$('input[name="numero-de-tarjeta"]').on('input', function () {
+    var numeroTarjeta = $(this).val();
+    // Expresión para validar el número de tarjeta
+    var tarjetaValida = /^[0-9]{16}$/.test(numeroTarjeta);
+
+    if (tarjetaValida) {
+        $(this).removeClass('is-invalid');
+        $(this).addClass('is-valid');
+    } else {
+        $(this).removeClass('is-valid');
+        $(this).addClass('is-invalid');
+    }
+
+    actualizarBotonEnvio();
+});
+
 // Tenemos que envolver la inicialización en document.ready para que se ejecute cada que se carga
 $(document).ready(function () {
 
-    const phoneInputField = $(".control-telefonoE");
+    const phoneInputField = $(".control-telefono");
     const phoneInput = window.intlTelInput(phoneInputField[0], {
         initialCountry: "ec",
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
@@ -136,13 +145,6 @@ $(document).ready(function () {
         phoneInputField.val(phoneNumber); // Vuelve a establecer el número formateado en el campo de entrada
     });
 
-    // Formateamos el número antes de enviarlo 
-    $('button[name="accion"][value="actualizar"]').on("click", function () {
-        const phoneNumber = phoneInput.getNumber(); // Obtén el número de teléfono formateado
-        phoneInputField.val(phoneNumber); // Vuelve a establecer el número formateado en el campo de entrada
-    });
-
-    // Desactivar ingreso de letras en el campo de teléfono
     phoneInputField.on("keypress", function (event) {
         const key = event.which || event.keyCode;
         const char = String.fromCharCode(key);
@@ -153,6 +155,7 @@ $(document).ready(function () {
     });
 
     function validatePhoneNumber() {
+        // Desactivar ingreso de letras en el campo de teléfono
         const isValid = phoneInput.isValidNumber();
         // Recupera el código del país por letra
         const countryCode = phoneInput.getSelectedCountryData().iso2;

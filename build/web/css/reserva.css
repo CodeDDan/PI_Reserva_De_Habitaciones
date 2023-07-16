@@ -1,0 +1,63 @@
+/* 
+    Created on : 15 jul 2023, 16:33:55
+    Author     : Daniel
+*/
+
+.cabecera-reserva {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.texto-cabecera {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.imagen-logo:hover {
+    transform: scale(1.1);
+    filter: invert(45%) sepia(93%) saturate(763%) hue-rotate(358deg) brightness(101%) contrast(110%);
+    transition: 0.5s;
+}
+
+.grupo-fecha {
+    display: flex;
+    align-items: center;
+}
+
+.imagen-logo {
+    width: 80px;
+    height: auto;
+}
+
+.form-group.row.reserva {
+    margin: 12px 200px;
+}
+
+.grupo-cantidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grupo-fecha-inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.grupo-botones {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    margin: 0 200px;
+}
+
+.pago, .regreso {
+    font-size: 20px;
+    width: 300px;
+    height: 50px;
+}
+
+

@@ -6,15 +6,16 @@ package Modelo;
  */
 public class Usuario {
 
-    private String id, nombre, apellido, correo, direccion, pass, telefono;
+    private String id, nombre, apellido, dni, correo, direccion, pass, telefono;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String apellido, String correo, String direccion, String pass, String telefono) {
+    public Usuario(String id, String nombre, String apellido, String dni, String correo, String direccion, String pass, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
         this.correo = correo;
         this.direccion = direccion;
         this.pass = pass;
@@ -43,6 +44,14 @@ public class Usuario {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getCorreo() {

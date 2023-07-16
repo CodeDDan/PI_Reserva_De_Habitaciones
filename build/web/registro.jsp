@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Para que funcione el selector de telefono -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
-        <title>Hotel Sanz Registro</title>
         <!--  Links para usar boostrap, es importante que estén primeros para no perder los estilos propios-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <title>Hotel Sanz Registro</title>
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/listar.css">
         <link rel="stylesheet" href="css/registro.css"/>
@@ -52,6 +53,18 @@
                         </div>
                         <div class="valid-feedback">
                             Apellido correcto!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <span class="col-sm-2 col-form-label">DNI</span>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="dni" aria-describedby="dniHelp" placeholder="DNI" required>
+                        <div class="invalid-feedback">
+                            Ingrese un DNI mayor a 10 números
+                        </div>
+                        <div class="valid-feedback">
+                            Luce bien!
                         </div>
                     </div>
                 </div>

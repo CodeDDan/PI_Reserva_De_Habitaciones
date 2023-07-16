@@ -73,6 +73,14 @@ $(document).ready(function () {
         // Deshabilitar la selección de días anteriores a la fecha actual
         $(".calendar").datepicker("option", "minDate", 0);
 
+        // Tenemos que poner este código para evitar el envío del formulario de reserva
+        $(".date-picker .input button").click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $parent = $(this).closest(".date-picker");
+            $parent.find(".calendar").datepicker("show");
+        });
+
     });
 });
 
