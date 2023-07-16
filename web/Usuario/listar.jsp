@@ -126,7 +126,7 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        var url = "js/listar.js";
+        var url = "js/listar_usuario.js";
         $.getScript(url);
     </script>
 </html>

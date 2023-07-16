@@ -129,7 +129,7 @@
     <!-- Se debe agregar el index.js porque contiene el script para la función del switch para empleado-->
     <script src="js/index.js"></script>
     <script>
-                    var url = "js/agregar.js";
+                    var url = "js/agregar_usuario.js";
                     $.getScript(url);
     </script>
 </html>

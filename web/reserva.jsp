@@ -13,12 +13,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Para que funcione el selector de telefono -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
-        <!--  Links para usar boostrap, es importante que estén primeros para no perder los estilos propios-->
+        <!-- Links para usar boostrap, es importante que estén primeros para no perder los estilos propios-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <!-- Flatpickr calendario -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <title>Hotel Sanz Reserva</title>
         <!-- Es importante que la referencia esté correctamente indicada o no sirven los estilos -->
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/calendario.css">
         <link rel="stylesheet" href="css/reserva.css">
         <!-- Agregamos estilos personalizados para que funcionen con el selector de paises -->
         <style>
@@ -40,9 +41,9 @@
                 <div class="texto-cabecera">Formulario de Reserva</div>
             </div>
             <!-- Para la programación, el atributo importante es name -->
-            <form  class="formulario-reserva" action="PagoControlador" method="POST">
+            <form  class="formulario-reserva" action="PagoControlador" method="POST" style="min-width: 600px;">
                 <div class="form-group row reserva">
-                    <span class="col-sm-3 col-form-label" style="font-weight: bold;">Código de la habitación</span>
+                    <span class="col-sm-3 col-form-label" style="font-weight: bold;">Código de habitación</span>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="codigo" placeholder="Código" value="${hab.getCodigo()}" disabled>
                     </div>
@@ -54,26 +55,10 @@
                     </div>
                 </div>
                 <div class="form-group row reserva grupo-fecha">
-                    <span class="col-sm-3 col-form-label" style="font-weight: bold;">Seleccione las fechas</span>
-                    <div class="col-sm-9 grupo-fecha-inputs">
-                        <div class="date-picker">
-                            <div class="input">
-                                <div class="result"><span></span></div>
-                                <button><img src="iconos/icons8-calendar-plus-50.png" alt="Calendario" style="width: 40px; height: auto;"/></button>
-                            </div>
-                            <div class="calendar" id="calendario-1"></div>
-                            <!-- Agregar campo oculto para la fecha 1 -->
-                            <input type="hidden" name="fecha-1" id="fecha-1">
-                        </div>
-                        <div class="date-picker">
-                            <div class="input">
-                                <div class="result"><span></span></div>
-                                <button><img src="iconos/icons8-calendar-plus-50.png" alt="Calendario" style="width: 40px; height: auto;"/></button>
-                            </div>
-                            <div class="calendar" id="calendario-2"></div>
-                            <!-- Agregar campo oculto para la fecha 2 -->
-                            <input type="hidden" name="fecha-2" id="fecha-2">
-                        </div>
+                    <span class="col-sm-3 col-form-label">Seleccione las fechas</span>
+                    <div class="col-sm-9 grupo-fecha-inputs" style="font-weight: bold; gap: 20px;">
+                        <input type="date" class="flatpickr-input llegada" id="llegada" name="fecha-llegada" placeholder="Llegada">
+                        <input type="date" class="flatpickr-input partida" id="salida" name="fecha-salida" placeholder="Salida">
                     </div>
                 </div>
                 <div class="form-group row reserva">
@@ -83,7 +68,7 @@
                     </div>
                 </div>
                 <div class="form-group row reserva">
-                    <span class="col-sm-3 col-form-label" style="font-weight: bold;">Detalles de la habitación</span>
+                    <span class="col-sm-3 col-form-label" style="font-weight: bold;">Detalles de habitación</span>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="detalle" placeholder="Descripción" value="${hab.getDetalles()}" disabled>
                     </div>
@@ -94,18 +79,18 @@
                         <input type="text" class="form-control" name="pais" placeholder="Ingrese su país de origen">
                     </div>
                 </div>
-                <div class="form-group row reserva">
+                <div class="form-group row reserva" style="display: flex; align-items: center;">
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Cantidad de personas</span>
                     <div class="col-sm-4">
+                        <span class="form-text">
+                            Cada persona extra tiene un recargo de $25.50.
+                        </span>
                         <div class="input-group">
                             <select class="form-control" name="cantidad" id="cantidad">
                                 <c:forEach begin="1" end="${cla.getCapacidad()}" var="i">
                                     <option value="${i}">${i}</option>
                                 </c:forEach>
                             </select>
-                            <span class="form-text">
-                                Cada persona extra tiene un recargo de $25.50.
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -132,7 +117,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Datos de pago</h1>
+                                <h1 class="modal-title fs-5 titulo-modal" id="exampleModalLabel">Datos de pago</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -204,9 +189,9 @@
                                 <div class="form-group row" style="margin-bottom: 10px; height: 54px;">
                                     <span class="col-sm-2 col-form-label">Monto a Pagar:</span>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="monto-pago" placeholder="Monto" required>
+                                        <input type="number" class="form-control" name="monto-pago" step="0.01" placeholder="Monto" required>
                                         <div class="invalid-feedback">
-                                            Por favor, ingresa el monto a pagar.
+                                            Montó mínimo de $30
                                         </div>
                                         <div class="valid-feedback">
                                             Monto válido.
@@ -236,14 +221,17 @@
             </form>
         </div>
     </body>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- TelInput -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
+    <!-- Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+    <script src="js/reserva.js"></script>
+    <!-- El script debe ir aquí porque obtenemos datos de request.setAtribute -->
     <script>
                         $(document).ready(function () {
                             $('#cantidad').change(function () {
@@ -255,32 +243,8 @@
 
                                 $('#precio-total').val(precioTotal.toFixed(2));
                             });
-
-                            // Inicializar el datepicker en los elementos de clase .calendar
-                            $(".calendar").datepicker({
-                                onSelect: function (selectedDate) {
-                                    var pickerId = $(this).attr("id"); // Obtener el ID del datepicker
-                                    var hiddenFieldId = "#fecha-" + pickerId.split("-")[1]; // Construir el ID del campo oculto
-                                    $(hiddenFieldId).val(selectedDate); // Actualizar el valor del campo oculto
-                                }
-                            });
-
-                            // Función para asignar el valor inicial del datepicker a los campos ocultos
-                            function asignarValorInicial() {
-                                $(".calendar").each(function () {
-                                    var pickerId = $(this).attr("id"); // Obtener el ID del datepicker
-                                    var hiddenFieldId = "#fecha-" + pickerId.split("-")[1]; // Construir el ID del campo oculto
-                                    var resultValue = $(this).datepicker('getDate'); // Obtener la fecha seleccionada del datepicker
-                                    var formattedDate = $.datepicker.formatDate('dd/mm/yy', resultValue); // Formatear la fecha
-                                    $(hiddenFieldId).val(formattedDate); // Asignar el valor formateado al campo oculto
-                                });
-                            }
-
-                            // Llamar a la función para asignar el valor inicial al cargar la página
-                            asignarValorInicial();
                         });
     </script>
-    <script src="js/reserva.js"></script>
     <!-- Colocar el calendario al final-->
     <script src="js/calendario.js"></script>
 </html>

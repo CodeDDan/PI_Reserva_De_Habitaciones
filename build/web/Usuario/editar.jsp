@@ -114,7 +114,7 @@
     </body>
     <!-- Propios -->
     <script>
-        var url = "js/editar.js";
+        var url = "js/editar_usuario.js";
         $.getScript(url);
     </script>
 </html>

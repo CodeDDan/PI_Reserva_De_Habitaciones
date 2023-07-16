@@ -112,7 +112,7 @@
     </body>
     <!-- Propios -->
     <script>
-        var url = "js/agregar.js";
+        var url = "js/agregar_usuario.js";
         $.getScript(url);
     </script>
 </html>

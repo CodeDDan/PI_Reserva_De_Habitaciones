@@ -109,6 +109,11 @@ $(document).ready(function () {
         // Establecer el valor máximo y mínimo en el campo montoPagar
         montoPagarInput.attr('min', montoMinimo);
         montoPagarInput.attr('max', precioTotal);
+        
+        var modalTitle = $('.titulo-modal');
+
+        // Actualizar el texto en el título del modal
+        modalTitle.text('Datos de pago por un valor total de: ' + precioTotal.toFixed(2));
     });
 
 });
