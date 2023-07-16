@@ -6,17 +6,16 @@ package Modelo;
  */
 public class Pago {
 
-    private String id, metodo, numeroDeTarjeta, comentario;
+    private String id, metodo, numeroDeTarjeta;
     private double monto;
 
     public Pago() {
     }
 
-    public Pago(String id, String metodo, String numeroDeTarjeta, String comentario, double monto) {
+    public Pago(String id, String metodo, String numeroDeTarjeta, double monto) {
         this.id = id;
         this.metodo = metodo;
         this.numeroDeTarjeta = numeroDeTarjeta;
-        this.comentario = comentario;
         this.monto = monto;
     }
 
@@ -42,14 +41,6 @@ public class Pago {
 
     public void setNumeroDeTarjeta(String numeroDeTarjeta) {
         this.numeroDeTarjeta = numeroDeTarjeta;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
     }
 
     public double getMonto() {

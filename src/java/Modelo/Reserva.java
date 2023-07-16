@@ -1,21 +1,18 @@
 package Modelo;
 
-import java.util.Date;
-
 /**
  *
  * @author Daniel
  */
 public class Reserva {
 
-    private String id, usuarioId, facturaId, habitacionId, paisDeOrigen, reservaEstado, comentario;
+    private String id, usuarioId, facturaId, habitacionId, paisDeOrigen, reservaEstado, comentario, fechaDeInicio, fechaDeFin;
     private int numeroDePersonas;
-    private Date fechaDeInicio, fechaDeFin;
 
     public Reserva() {
     }
 
-    public Reserva(String id, String usuarioId, String facturaId, String habitacionId, String paisDeOrigen, String reservaEstado, String comentario, int numeroDePersonas, Date fechaDeInicio, Date fechaDeFin) {
+    public Reserva(String id, String usuarioId, String facturaId, String habitacionId, String paisDeOrigen, String reservaEstado, String comentario, String fechaDeInicio, String fechaDeFin, int numeroDePersonas) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.facturaId = facturaId;
@@ -23,9 +20,9 @@ public class Reserva {
         this.paisDeOrigen = paisDeOrigen;
         this.reservaEstado = reservaEstado;
         this.comentario = comentario;
-        this.numeroDePersonas = numeroDePersonas;
         this.fechaDeInicio = fechaDeInicio;
         this.fechaDeFin = fechaDeFin;
+        this.numeroDePersonas = numeroDePersonas;
     }
 
     public String getId() {
@@ -84,28 +81,28 @@ public class Reserva {
         this.comentario = comentario;
     }
 
+    public String getFechaDeInicio() {
+        return fechaDeInicio;
+    }
+
+    public void setFechaDeInicio(String fechaDeInicio) {
+        this.fechaDeInicio = fechaDeInicio;
+    }
+
+    public String getFechaDeFin() {
+        return fechaDeFin;
+    }
+
+    public void setFechaDeFin(String fechaDeFin) {
+        this.fechaDeFin = fechaDeFin;
+    }
+
     public int getNumeroDePersonas() {
         return numeroDePersonas;
     }
 
     public void setNumeroDePersonas(int numeroDePersonas) {
         this.numeroDePersonas = numeroDePersonas;
-    }
-
-    public Date getFechaDeInicio() {
-        return fechaDeInicio;
-    }
-
-    public void setFechaDeInicio(Date fechaDeInicio) {
-        this.fechaDeInicio = fechaDeInicio;
-    }
-
-    public Date getFechaDeFin() {
-        return fechaDeFin;
-    }
-
-    public void setFechaDeFin(Date fechaDeFin) {
-        this.fechaDeFin = fechaDeFin;
     }
 
 }

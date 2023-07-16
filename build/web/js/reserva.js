@@ -5,7 +5,8 @@ function actualizarBotonEnvio() {
             $('input[name="apellido"]').val() === '' ||
             $('input[name="correo"]').val() === '' ||
             $('input[name="direccion"]').val() === '' ||
-            $('input[name="telefono"]').val() === '';
+            $('input[name="telefono"]').val() === '' ||
+            $('input[name="numero-de-tarjeta"]').val() === '';
 
     if (hayCamposInvalidos || hayCamposVacios) {
         $('button[name="accion"][value="pagar"]').attr('disabled', 'disabled');

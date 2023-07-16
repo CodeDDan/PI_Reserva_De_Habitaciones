@@ -41,17 +41,18 @@
                 <div class="texto-cabecera">Formulario de Reserva</div>
             </div>
             <!-- Para la programación, el atributo importante es name -->
-            <form  class="formulario-reserva" action="PagoControlador" method="POST" style="min-width: 600px;">
+            <form  class="formulario-reserva" action="PagoControlador" method="POST">
                 <div class="form-group row reserva">
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Código de habitación</span>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="codigo" placeholder="Código" value="${hab.getCodigo()}" disabled>
+                        <input type="hidden" name="habitacion-id" value="${hab.getId()}">
+                        <input type="text" class="form-control" name="codigo" placeholder="Código" value="${hab.getCodigo()}" readonly>
                     </div>
                 </div>
                 <div class="form-group row reserva">
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Habitación de clase</span>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="clase" placeholder="Clase" value="${cla.getNombre()}" disabled>
+                        <input type="text" class="form-control" name="clase" placeholder="Clase" value="${cla.getNombre()}" readonly>
                     </div>
                 </div>
                 <div class="form-group row reserva grupo-fecha">
@@ -64,13 +65,13 @@
                 <div class="form-group row reserva">
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Descripción</span>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="${cla.getDescripcion()}" disabled>
+                        <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="${cla.getDescripcion()}" readonly>
                     </div>
                 </div>
                 <div class="form-group row reserva">
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Detalles de habitación</span>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="detalle" placeholder="Descripción" value="${hab.getDetalles()}" disabled>
+                        <input type="text" class="form-control" name="detalle" placeholder="Descripción" value="${hab.getDetalles()}" readonly>
                     </div>
                 </div>
                 <div class="form-group row reserva">
@@ -97,7 +98,7 @@
                 <div class="form-group row reserva">
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Precio Total</span>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="precio-total" id="precio-total" placeholder="Total" value="${cla.getPrecioBase()}" disabled>
+                        <input type="text" class="form-control" name="precio-total" id="precio-total" placeholder="Total" value="${cla.getPrecioBase()}" readonly>
                     </div>
                 </div>
                 <div class="form-group row reserva">
@@ -180,7 +181,7 @@
                                 <div class="form-group row" style="margin-bottom: 10px; height: 54px;">
                                     <span class="col-sm-2 col-form-label">Método de Pago:</span>
                                     <div class="col-sm-10">
-                                        <select class="form-control" name="metodoPago" required>
+                                        <select class="form-control" name="metodo-de-pago" required>
                                             <option value="debito">Débito</option>
                                             <option value="credito">Crédito</option>
                                         </select>
@@ -213,7 +214,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" form="formulario-reserva" class="btn btn-primary btn-submitI" id="btnSubmitIngresar" name="accion" value ="pagar">Pagar</button>
+                                <button type="submit" class="btn btn-primary btn-submitR" id="btnSubmitReserva" name="accion" value ="pagar">Pagar</button>
                             </div>
                         </div>
                     </div>

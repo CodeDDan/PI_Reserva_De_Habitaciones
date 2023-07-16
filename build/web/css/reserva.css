@@ -72,3 +72,6 @@
     font-weight: 900;
 }
 
+input[readonly]:not(.flatpickr-input)  {
+    background-color: #f1f1f1;
+}

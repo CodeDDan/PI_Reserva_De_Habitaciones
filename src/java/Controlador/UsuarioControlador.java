@@ -111,7 +111,6 @@ public class UsuarioControlador extends HttpServlet {
         }
 
         String action = request.getParameter("accion");
-        System.out.println("Estoy en el método doPost()");
         if (action.equalsIgnoreCase("ingresar")) {
             String correo = request.getParameter("correo-ingreso");
             String password = request.getParameter("password-ingreso");

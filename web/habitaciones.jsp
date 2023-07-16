@@ -20,6 +20,15 @@
     </head>
     <body>
         <jsp:include page="header.jsp" />
+        <% if (session.getAttribute("reserva") != null) {%>
+        <div class="alert alert-primary alert-dismissible fade show alerta-personalizada" role="alert">
+            <strong>Reserva Exitosa</strong> <%= session.getAttribute("reserva")%>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <%
+                session.removeAttribute("reserva");
+            %>
+        </div>
+        <% }%>
         <div class="contenedor-texto-inicial">
             <div class="texto-inicial">
                 Su estadía con Hotel Sanz incluye los siguientes servicios

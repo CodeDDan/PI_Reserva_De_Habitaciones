@@ -65,7 +65,6 @@ public class ReservaControlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Estoy en reserva GET");
         String action = request.getParameter("accion");
         if (action.equalsIgnoreCase("reservar")) {
             int hab_id = Integer.parseInt(request.getParameter("habitacion-id"));
