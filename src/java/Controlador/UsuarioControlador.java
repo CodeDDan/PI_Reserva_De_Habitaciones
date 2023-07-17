@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpSession;
 public class UsuarioControlador extends HttpServlet {
 
     //Direcciones de nuestros archivos, usar direcciones absolutas para evitar problemas
-    String vistaUsu = "/PI_Reserva_De_Habitaciones/dashboard.html";
     String vistaEmp = "/PI_Reserva_De_Habitaciones/dashboardempe.html";
     String index = "/PI_Reserva_De_Habitaciones/index.jsp";
     String listar = "Usuario/listar.jsp";
@@ -156,7 +155,7 @@ public class UsuarioControlador extends HttpServlet {
             usuario.setTelefono(usu_Telefono);
             usuDao.add(usuario);
             if (origen != null && origen.equalsIgnoreCase("registro")) {
-                session.setAttribute("ingreso-exitoso", "Puede iniciar sesión");
+                session.setAttribute("registro-exitoso", "Puede iniciar sesión");
                 response.sendRedirect(index);
                 return;
             }

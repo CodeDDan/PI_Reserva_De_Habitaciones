@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controlador;
 
 import Modelo.Habitacion;
-import Modelo.Reserva;
-import ModeloDAO.Clase_HabitacionDAO;
 import ModeloDAO.HabitacionDAO;
-import ModeloDAO.ReservaDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,22 +10,24 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Daniel
  */
-@WebServlet(name = "ReservaControlador", urlPatterns = {"/ReservaControlador"})
-public class ReservaControlador extends HttpServlet {
+@WebServlet(name = "HabitacionControlador", urlPatterns = {"/HabitacionControlador"})
+public class HabitacionControlador extends HttpServlet {
 
-    String listar = "Reserva/listar.jsp";
-    String add = "Reserva/agregar.jsp";
-    String edit = "Reserva/editar.jsp";
+    String listar = "Habitacion/listar.jsp";
+    String add = "Habitacion/agregar.jsp";
+    String edit = "Habitacion/editar.jsp";
     HabitacionDAO habDao = new HabitacionDAO();
-    Clase_HabitacionDAO claDao = new Clase_HabitacionDAO();
-    ReservaDAO resDao = new ReservaDAO();
     Habitacion hab = new Habitacion();
-    Reserva res = new Reserva();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,10 +46,10 @@ public class ReservaControlador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ReservaControlador</title>");
+            out.println("<title>Servlet HabitacionControlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ReservaControlador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet HabitacionControlador at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,22 +69,13 @@ public class ReservaControlador extends HttpServlet {
             throws ServletException, IOException {
         String acceso = "";
         String action = request.getParameter("accion");
-        if (action.equalsIgnoreCase("reservar")) {
-            int hab_id = Integer.parseInt(request.getParameter("habitacion-id"));
-            hab = habDao.list(hab_id);
-            int cla_id = Integer.parseInt(hab.getClaseId());
-            request.setAttribute("hab", hab);
-            request.setAttribute("cla", claDao.list(cla_id));
-            RequestDispatcher vista = request.getRequestDispatcher("/reserva.jsp");
-            vista.forward(request, response);
-            return;
-        } else if (action.equalsIgnoreCase("listar")) {
+        if (action.equalsIgnoreCase("listar")) {
             acceso = listar;
         } else if (action.equalsIgnoreCase("agregar")) {
             acceso = add;
         } else if (action.equalsIgnoreCase("editar")) {
-            int res_id = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("res", resDao.list(res_id));
+            int hab_id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("hab", habDao.list(hab_id));
             acceso = edit;
         }
         // Usar las lineas siguientes genera un reenvío de formulario
@@ -109,38 +95,56 @@ public class ReservaControlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("accion");
-        if (action.equalsIgnoreCase("actualizar")) {
-            String usu_Id = request.getParameter("usuario-id");
-            String fac_Id = request.getParameter("factura-id");
-            String hab_Id = request.getParameter("habitacion-id");
-            String num_personas = request.getParameter("num-personas");
-            String fecha_llegada = request.getParameter("fecha-llegada");
-            String fecha_salida = request.getParameter("fecha-salida");
-            String pais = request.getParameter("pais");
-            String estado = request.getParameter("estado");
-            String comentario = request.getParameter("comentario");
-            res.setId(request.getParameter("id_edit"));
-            res.setUsuarioId(usu_Id);
-            res.setFacturaId(fac_Id);
-            res.setHabitacionId(hab_Id);
-            res.setNumeroDePersonas(Integer.parseInt(num_personas));
-            res.setFechaDeInicio(fecha_llegada);
-            res.setFechaDeFin(fecha_salida);
-            res.setPaisDeOrigen(pais);
-            res.setReservaEstado(estado);
-            res.setComentario(comentario);
-            resDao.edit(res);
+        String action;
+        action = request.getParameter("accion");
+        if (action.equalsIgnoreCase("agregar-habitacion")) {
+            String hol_Id = request.getParameter("hotel-id");
+            String cla_Id = request.getParameter("clase-id");
+            String codigo = request.getParameter("codigo");
+            String detalles = request.getParameter("detalles");
+            String ult_mantenimiento = request.getParameter("fecha-mantenimiento");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha = new Date();
+            try {
+                fecha = formato.parse(ult_mantenimiento);
+            } catch (ParseException ex) {
+                System.err.println("Error al transformar la fecha");
+            }
+            hab.setHotelId(hol_Id);
+            hab.setClaseId(cla_Id);
+            hab.setCodigo(codigo);
+            hab.setDetalles(detalles);
+            hab.setUltimoMantenimiento(fecha);
+            habDao.add(hab);
+        } else if (action.equalsIgnoreCase("actualizar")) {
+            String hol_Id = request.getParameter("hotel-id");
+            String cla_Id = request.getParameter("clase-id");
+            String codigo = request.getParameter("codigo");
+            String detalles = request.getParameter("detalles");
+            String ult_mantenimiento = request.getParameter("fecha-mantenimiento");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha = new Date();
+            try {
+                fecha = formato.parse(ult_mantenimiento);
+            } catch (ParseException ex) {
+                System.err.println("Error al transformar la fecha");
+            }
+            hab.setId(request.getParameter("id_edit"));
+            hab.setHotelId(hol_Id);
+            hab.setClaseId(cla_Id);
+            hab.setCodigo(codigo);
+            hab.setDetalles(detalles);
+            hab.setUltimoMantenimiento(fecha);
+            habDao.edit(hab);
         } else if (action.equalsIgnoreCase("eliminar")) {
             int id = Integer.parseInt(request.getParameter("id"));
-            resDao.delete(id);
+            habDao.delete(id);
         }
-
         /*
         La siguiente linea de código evita el reenvío de formulario, como las vistas de agregar 
         y editar se dirigen al mismo jsp, podemos usarlo sin problema.
          */
-        response.sendRedirect(request.getContextPath() + "/ReservaControlador?accion=listar");
+        response.sendRedirect(request.getContextPath() + "/HabitacionControlador?accion=listar");
     }
 
     /**

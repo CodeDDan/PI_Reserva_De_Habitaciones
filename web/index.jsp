@@ -70,7 +70,7 @@
             <img src="imagenes/hotel_5.jpg" alt="Hotel_5"/>
             <img src="imagenes/hotel_6.jpg" alt="Hotel_6" style="border-radius: 0 10px 10px 0;"/>
         </div>
-        <div><a href="UsuarioControlador?accion=listar">Listar</a></div>
+        <div><a href="HabitacionControlador?accion=listar">Listar</a></div>
         <footer>
             <h3>©2023 Daniel Sánchez</h3>
             <h4>Proyecto Integrador de Reserva de Habitaciones - Todos los derechos reservados</h4>

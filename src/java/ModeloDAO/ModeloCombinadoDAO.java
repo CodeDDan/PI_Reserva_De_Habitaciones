@@ -22,9 +22,11 @@ public class ModeloCombinadoDAO {
     public List detallesHabitaciones() {
         List<String> detalles = new ArrayList<>();
         String sql = """
-                     SELECT h.hab_Id, h.hab_Codigo, h.hab_Detalles, ch.cla_Nombre, ch.cla_Descripcion, ch.cla_CapacidadMaxima, ch.cla_PrecioBase
-                     FROM habitacion h
-                     INNER JOIN clase_habitacion ch ON h.cla_Id = ch.cla_Id; """;
+                    SELECT h.hab_Id, h.hab_Codigo, h.hab_Detalles, ch.cla_Nombre, ch.cla_Descripcion, ch.cla_CapacidadMaxima, ch.cla_PrecioBase
+                    FROM habitacion h
+                    INNER JOIN clase_habitacion ch ON h.cla_Id = ch.cla_Id
+                    WHERE h.activo != 0
+                    ORDER BY h.hab_Id;""";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

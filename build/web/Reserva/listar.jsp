@@ -46,6 +46,8 @@
                         <th scope="col">País</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Comentario</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,7 +95,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">Nuevo Usuario</h1>
+                        <h1 class="modal-title fs-5">Nueva Reserva</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -109,7 +111,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">Editar usuario</h1>
+                        <h1 class="modal-title fs-5">Editar reserva</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

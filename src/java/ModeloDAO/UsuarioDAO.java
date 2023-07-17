@@ -79,7 +79,7 @@ public class UsuarioDAO implements UsuarioCRUD {
             ps.setString(1, String.valueOf(usu_id));
             ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error en el update" + e);
+            System.out.println("Error en el delete" + e);
         }
         return false;
     }
@@ -87,7 +87,7 @@ public class UsuarioDAO implements UsuarioCRUD {
     @Override
     public List listar() {
         ArrayList<Usuario> list = new ArrayList<>();
-        String sql = "SELECT * FROM Usuario WHERE activo != 0";
+        String sql = "SELECT * FROM Usuario WHERE activo != 0 ORDER BY usu_Id;";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class UsuarioDAO implements UsuarioCRUD {
                 usu.setTelefono(rs.getString("usu_Telefono"));
             }
         } catch (SQLException e) {
-            System.out.println("Error en la consulta de editar" + e);
+            System.out.println("Error en la consulta de list usuario" + e);
         }
         return usu;
     }

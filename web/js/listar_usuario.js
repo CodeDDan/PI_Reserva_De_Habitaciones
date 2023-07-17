@@ -1,7 +1,7 @@
 // Para confirmar la eliminación
 function clicked(e)
 {
-    if (!confirm('Are you sure?')) {
+    if (!confirm('¿Estás seguro?')) {
         e.preventDefault();
     }
 }
