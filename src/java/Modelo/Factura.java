@@ -10,14 +10,13 @@ import java.util.Random;
  */
 public class Factura {
 
-    private String id, pagoId, codigo, estadoDeFactura;
-    private Date fechaDeEmision;
+    private String id, pagoId, codigo, estadoDeFactura, fechaDeEmision;
     private double montoTotal;
 
     public Factura() {
     }
 
-    public Factura(String id, String pagoId, String codigo, String estadoDeFactura, Date fechaDeEmision, double montoTotal) {
+    public Factura(String id, String pagoId, String codigo, String estadoDeFactura, String fechaDeEmision, double montoTotal) {
         this.id = id;
         this.pagoId = pagoId;
         this.codigo = codigo;
@@ -38,8 +37,8 @@ public class Factura {
         return pagoId;
     }
 
-    public void setPagoId(String pag_Id) {
-        this.pagoId = pag_Id;
+    public void setPagoId(String pagoId) {
+        this.pagoId = pagoId;
     }
 
     public String getCodigo() {
@@ -58,11 +57,11 @@ public class Factura {
         this.estadoDeFactura = estadoDeFactura;
     }
 
-    public Date getFechaDeEmision() {
+    public String getFechaDeEmision() {
         return fechaDeEmision;
     }
 
-    public void setFechaDeEmision(Date fechaDeEmision) {
+    public void setFechaDeEmision(String fechaDeEmision) {
         this.fechaDeEmision = fechaDeEmision;
     }
 
@@ -92,7 +91,7 @@ public class Factura {
 
         return codigoFactura;
     }
-    
+
     public Date obtenerFechaActual() {
         // Obtener la fecha actual
         Date fechaActual = new Date();

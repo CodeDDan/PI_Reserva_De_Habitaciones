@@ -110,7 +110,27 @@ public class ReservaControlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("accion");
-        if (action.equalsIgnoreCase("actualizar")) {
+        if (action.equalsIgnoreCase("agregar_reserva")) {
+            String usu_Id = request.getParameter("usuario-id");
+            String fac_Id = request.getParameter("factura-id");
+            String hab_Id = request.getParameter("habitacion-id");
+            String num_personas = request.getParameter("num-personas");
+            String fecha_llegada = request.getParameter("fecha-llegada");
+            String fecha_salida = request.getParameter("fecha-salida");
+            String pais = request.getParameter("pais");
+            String estado = request.getParameter("estado");
+            String comentario = request.getParameter("comentario");
+            res.setUsuarioId(usu_Id);
+            res.setFacturaId(fac_Id);
+            res.setHabitacionId(hab_Id);
+            res.setNumeroDePersonas(Integer.parseInt(num_personas));
+            res.setFechaDeInicio(fecha_llegada);
+            res.setFechaDeFin(fecha_salida);
+            res.setPaisDeOrigen(pais);
+            res.setReservaEstado(estado);
+            res.setComentario(comentario);
+            resDao.add(res);
+        } else if (action.equalsIgnoreCase("actualizar")) {
             String usu_Id = request.getParameter("usuario-id");
             String fac_Id = request.getParameter("factura-id");
             String hab_Id = request.getParameter("habitacion-id");

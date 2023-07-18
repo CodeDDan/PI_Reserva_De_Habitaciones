@@ -12,6 +12,7 @@ import ModeloDAO.FacturaDAO;
 import ModeloDAO.PagoDAO;
 import ModeloDAO.ReservaDAO;
 import ModeloDAO.UsuarioDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -28,8 +29,10 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet(name = "PagoControlador", urlPatterns = {"/PagoControlador"})
 public class PagoControlador extends HttpServlet {
 
-    String index = "/PI_Reserva_De_Habitaciones/index.jsp";
     String habitaciones = "/PI_Reserva_De_Habitaciones/habitaciones.jsp";
+    String listar = "Pago/listar.jsp";
+    String add = "Pago/agregar.jsp";
+    String edit = "Pago/editar.jsp";
     PagoDAO pagDao = new PagoDAO();
     FacturaDAO facDao = new FacturaDAO();
     ReservaDAO resDao = new ReservaDAO();
@@ -77,7 +80,22 @@ public class PagoControlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String acceso = "";
+        String action = request.getParameter("accion");
+        // action = "listar" Que está en el href de index
+        if (action.equalsIgnoreCase("listar")) {
+            acceso = listar;
+        } else if (action.equalsIgnoreCase("agregar")) {
+            acceso = add;
+        } else if (action.equalsIgnoreCase("editar")) {
+            int pag_id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("pag", pagDao.list(pag_id));
+            acceso = edit;
+        }
+        // Usar las lineas siguientes genera un reenvío de formulario
+        // No procesar aquí los formularios
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        vista.forward(request, response);
     }
 
     /**
@@ -92,7 +110,6 @@ public class PagoControlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("accion");
-        System.out.println("Estoy en el método doPost()");
         if (action.equalsIgnoreCase("pagar")) {
             // Obtener los demás parámetros del formulario
             String hab_id = request.getParameter("habitacion-id");
@@ -116,7 +133,7 @@ public class PagoControlador extends HttpServlet {
             pago.setNumeroDeTarjeta(numeroTarjeta);
 
             factura.setCodigo(factura.generarCodigoFactura());
-            factura.setFechaDeEmision(factura.obtenerFechaActual());
+            factura.setFechaDeEmision(factura.obtenerFechaActual().toString());
             factura.setMontoTotal(Double.parseDouble(montoPago));
             factura.setEstadoDeFactura("Pagado");
 
@@ -148,12 +165,39 @@ public class PagoControlador extends HttpServlet {
             reserva.setReservaEstado("Reservado");
             reserva.setComentario(comentario);
             resDao.add(reserva);
-            
+
             HttpSession session = request.getSession();
             session.setAttribute("reserva", "Proceso realizado con éxito!");
-            
+
             response.sendRedirect(habitaciones);
+            return;
+        } else if (action.equalsIgnoreCase("agregar_pago")) {
+            String pag_Metodo = request.getParameter("metodo");
+            String pag_Monto = request.getParameter("monto");
+            String pag_NumeroDeTarjeta = request.getParameter("num-tarjeta");
+            pago.setMetodo(pag_Metodo);
+            pago.setMonto(Double.parseDouble(pag_Monto));
+            pago.setNumeroDeTarjeta(pag_NumeroDeTarjeta);
+            pagDao.add(pago);
+        } else if (action.equalsIgnoreCase("actualizar")) {
+            String pag_Metodo = request.getParameter("metodo");
+            String pag_Monto = request.getParameter("monto");
+            String pag_NumeroDeTarjeta = request.getParameter("num-tarjeta");
+            pago.setId(request.getParameter("id_edit"));
+            pago.setMetodo(pag_Metodo);
+            pago.setMonto(Double.parseDouble(pag_Monto));
+            pago.setNumeroDeTarjeta(pag_NumeroDeTarjeta);
+            pagDao.edit(pago);
+        } else if (action.equalsIgnoreCase("eliminar")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            pagDao.delete(id);
         }
+
+        /*
+        La siguiente linea de código evita el reenvío de formulario, como las vistas de agregar 
+        y editar se dirigen al mismo jsp, podemos usarlo sin problema.
+         */
+        response.sendRedirect(request.getContextPath() + "/PagoControlador?accion=listar");
     }
 
     /**
