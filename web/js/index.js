@@ -44,21 +44,23 @@ $(document).ready(function () {
         }
     }
 
-    var label = $(".label-Empleado");
-
     $('#switch-Empleado').on('change', function () {
-        // Abrimos el collapse para el empleado y a su vez validamos hacia que controlador o acción debe ir
+        var formulario = $('#formulario-ingreso');
+        var label = $('.label-Empleado');
+
+        // Abrimos el collapse para el empleado y a su vez validamos hacia qué controlador o acción debe ir
         if ($(this).is(':checked')) {
             $('#collapse-Empleado').collapse('show');
             label.css("color", "#FF7F00");
-            $("#btnSubmitIngresar").val("ingresar-Empleado");
+            formulario.attr("action", "EmpleadoControlador");
         } else {
             $('#collapse-Empleado').collapse('hide');
             $('input[name="nombre"]#name').val(''); // Limpia el valor del input
             label.css("color", "black");
-            $("#btnSubmitIngresar").val("ingresar");
+            formulario.attr("action", "UsuarioControlador");
         }
     });
+
 
 });
 

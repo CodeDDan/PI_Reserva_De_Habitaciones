@@ -8,14 +8,13 @@ import java.util.Date;
  */
 public class Empleado {
 
-    private String id, hotelId, nombre, apellido, pass, correo, direccion;
+    private String id, hotelId, nombre, apellido, pass, correo, direccion, fechaContratacion, dni, telefono;
     private double salario;
-    private Date fechaDeContratacion;
 
     public Empleado() {
     }
 
-    public Empleado(String id, String hotelId, String nombre, String apellido, String pass, String correo, String direccion, double salario, Date fechaDeContratacion) {
+    public Empleado(String id, String hotelId, String nombre, String apellido, String pass, String correo, String direccion, String fechaContratacion, String dni, String telefono, double salario) {
         this.id = id;
         this.hotelId = hotelId;
         this.nombre = nombre;
@@ -23,8 +22,10 @@ public class Empleado {
         this.pass = pass;
         this.correo = correo;
         this.direccion = direccion;
+        this.fechaContratacion = fechaContratacion;
+        this.dni = dni;
+        this.telefono = telefono;
         this.salario = salario;
-        this.fechaDeContratacion = fechaDeContratacion;
     }
 
     public String getId() {
@@ -83,20 +84,36 @@ public class Empleado {
         this.direccion = direccion;
     }
 
+    public String getFechaContratacion() {
+        return fechaContratacion;
+    }
+
+    public void setFechaContratacion(String fechaContratacion) {
+        this.fechaContratacion = fechaContratacion;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     public double getSalario() {
         return salario;
     }
 
     public void setSalario(double salario) {
         this.salario = salario;
-    }
-
-    public Date getFechaDeContratacion() {
-        return fechaDeContratacion;
-    }
-
-    public void setFechaDeContratacion(Date fechaDeContratacion) {
-        this.fechaDeContratacion = fechaDeContratacion;
     }
 
 }

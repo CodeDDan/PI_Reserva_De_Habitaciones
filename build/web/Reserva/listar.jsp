@@ -28,7 +28,7 @@
                         Nueva reserva
                     </button>
                     <input type="text" id="buscarInput" class="form-control" placeholder="Buscar...">
-                    <a type="button" class="btn btn-primary" href="index.jsp">Regresar </a>
+                    <a type="button" class="btn btn-primary" href="dashboard_empleado.jsp">Regresar </a>
                 </div>
             </form>
         </nav>

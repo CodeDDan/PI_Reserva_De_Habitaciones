@@ -134,9 +134,6 @@ public class UsuarioControlador extends HttpServlet {
                 response.sendRedirect(index);
             }
             return;
-        } else if (action.equalsIgnoreCase("ingresar-Empleado")) {
-            response.sendRedirect(vistaEmp);
-            return;
         } else if (action.equalsIgnoreCase("agregar_usuario")) {
             String origen = request.getParameter("origen");
             String usu_Nombre = request.getParameter("nombre");

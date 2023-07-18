@@ -19,7 +19,7 @@
             <li class="barra-vertical"></li>
 
             <c:choose>
-                <c:when test="${sessionScope.usuario == null}">
+                <c:when test="${sessionScope.usuario == null && sessionScope.emp == null}">
                     <li><button onclick="window.location.href = 'registro.jsp';" class="boton-registro">Registrarse</button></li>
                     <li>
                         <!-- Button trigger modal -->
@@ -28,14 +28,21 @@
                         </button>
                     </li>
                 </c:when>
-                <c:otherwise>
-                    <form id="cerrar-sesion" action="CerrarSesionControlador" method="post" style="display: none;">
-                    </form>
+
+                <c:when test="${sessionScope.usuario != null && sessionScope.emp == null}">
+                    <form id="cerrar-sesion" action="CerrarSesionControlador" method="post" style="display: none;"></form>
                     <li><button class="boton-cerrar" type="submit" form="cerrar-sesion">Cerrar Sesión</button></li>
                     <li><button type="button" class="boton-iniciar">Bienvenido ${usuario.getNombre()}</button></li>
-                    </c:otherwise>
-                </c:choose>
 
+                </c:when>
+
+                <c:when test="${sessionScope.emp != null && sessionScope.usuario == null}">
+                    <form id="cerrar-sesion" action="CerrarSesionControlador" method="post" style="display: none;"></form>
+                    <li><button class="boton-cerrar" type="submit" form="cerrar-sesion">Cerrar Sesión</button></li>
+                    <li><button onclick="window.location.href = 'dashboard_empleado.jsp';" class="boton-iniciar">Ir a las tablas</button>
+                    </li>
+                </c:when>
+            </c:choose>
         </ul>
     </header>
 </div>
@@ -65,7 +72,7 @@
                     <div class="collapse" id="collapse-Empleado">
                         <div class="mb-3" style="margin-top: 10px;">
                             <label for="name" class="form-label">Nombre</label>
-                            <input type="password" class="form-control" id="name" name="nombre-ingreso" placeholder="Ingresa tu nombre" autocomplete="on">
+                            <input type="text" class="form-control" id="name" name="nombre-empleado" placeholder="Ingresa tu nombre" autocomplete="on">
                         </div>
                     </div>
                 </form>

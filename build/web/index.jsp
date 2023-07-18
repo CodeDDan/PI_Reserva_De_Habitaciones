@@ -55,7 +55,7 @@
         </section>
         <div class="registro-rapido">
             <div class="registro-rapido-acciones">
-                <form class="formulario-rapido">
+                <form class="formulario-rapido" method="post">
                     <input type="date" class="flatpickr-input llegada" id="llegada" name="llegada" placeholder="Llegada">
                     <input type="date" class="flatpickr-input partida" id="salida" name="salida" placeholder="Salida">
                     <button class="boton-registro-rapido">Reserva rápida, 1 persona</button>
