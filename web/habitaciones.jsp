@@ -22,7 +22,7 @@
         <jsp:include page="header.jsp" />
         <% if (session.getAttribute("reserva") != null) {%>
         <div class="alert alert-primary alert-dismissible fade show alerta-personalizada" role="alert">
-            <strong>Reserva Exitosa</strong> <%= session.getAttribute("reserva")%>
+            <strong> <%= session.getAttribute("reserva")%> </strong> 
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <%
                 session.removeAttribute("reserva");
@@ -131,7 +131,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= cardTipo%></h5>
                     <p class="card-text"><%= cardText%></p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<%= count%>"><%= buttonLabel%></button>
+                    <button type="button" class="btn btn-primary boton-modal-propio" data-bs-toggle="modal" data-bs-target="#modal<%= count%>"><%= buttonLabel%></button>
                 </div>
             </div>
             <!-- Modal dinámico-->

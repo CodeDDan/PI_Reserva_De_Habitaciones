@@ -128,6 +128,31 @@ public class PagoControlador extends HttpServlet {
             String montoPago = request.getParameter("monto-pago");
             String numeroTarjeta = request.getParameter("numero-de-tarjeta");
 
+            // Controlamos que no ingrese un correo ya existente con otro usuario
+            int usu_id = usuDao.existeUsuario(correo, nombre, apellido);
+            if (usu_id != -1) {
+                reserva.setUsuarioId(String.valueOf(usu_id));
+            } else {
+                usu.setNombre(nombre);
+                usu.setApellido(apellido);
+                usu.setCorreo(correo);
+                usu.setDireccion(direccion);
+                usu.setTelefono(telefono);
+                usuDao.addEspecial(usu);
+                usu_id = usuDao.obtenerUltimoUsuarioId();
+                reserva.setUsuarioId(String.valueOf(usu_id));
+            }
+
+            // Verificamos si el ID es diferente de cero (caso de correo existente);
+            if (usu_id == 0) {
+                HttpSession session = request.getSession();
+                session.setAttribute("reserva", "Error: El correo que intenta usar ya existe y está asociado a otro usuario");
+
+                response.sendRedirect(habitaciones);
+                return;
+            }
+
+            // Procedemos con el pago 
             pago.setMetodo(metodoPago);
             pago.setMonto(Double.parseDouble(montoPago));
             pago.setNumeroDeTarjeta(numeroTarjeta);
@@ -144,19 +169,6 @@ public class PagoControlador extends HttpServlet {
 
             int factura_id = facDao.obtenerUltimaFacturaId();
             reserva.setFacturaId(String.valueOf(factura_id));
-            int usu_id = usuDao.existeUsuario(correo, nombre, apellido);
-            if (usu_id != -1) {
-                reserva.setUsuarioId(String.valueOf(usu_id));
-            } else {
-                usu.setNombre(nombre);
-                usu.setApellido(apellido);
-                usu.setCorreo(correo);
-                usu.setDireccion(direccion);
-                usu.setTelefono(telefono);
-                usuDao.addEspecial(usu);
-                usu_id = usuDao.obtenerUltimoUsuarioId();
-                reserva.setUsuarioId(String.valueOf(usu_id));
-            }
             reserva.setHabitacionId(hab_id);
             reserva.setNumeroDePersonas(Integer.parseInt(cantidad));
             reserva.setFechaDeInicio(fechaLlegada);
@@ -167,7 +179,7 @@ public class PagoControlador extends HttpServlet {
             resDao.add(reserva);
 
             HttpSession session = request.getSession();
-            session.setAttribute("reserva", "Proceso realizado con éxito!");
+            session.setAttribute("reserva", "Reserva realizda con éxito!");
 
             response.sendRedirect(habitaciones);
             return;

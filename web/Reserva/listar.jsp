@@ -60,7 +60,9 @@
                     %>
                     <tr>
                         <th scope="row"><%= res.getId()%></th>
-                        <td><%= res.getUsuarioId()%></td>
+                        <td> <a href="UsuarioControlador?accion=listar">
+                                <%= res.getUsuarioId()%>
+                            </a></td>
                         <td><%= res.getFacturaId()%></td>
                         <td><%= res.getHabitacionId()%></td>
                         <td><%= res.getNumeroDePersonas()%></td>
@@ -128,7 +130,7 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        var url = "js/listar_reserva.js";
-        $.getScript(url);
+                                    var url = "js/listar_reserva.js";
+                                    $.getScript(url);
     </script>
 </html>

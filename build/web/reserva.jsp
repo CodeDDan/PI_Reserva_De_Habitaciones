@@ -4,6 +4,7 @@
     Author     : Daniel
 --%>
 
+<%@page import="Modelo.Clase_Habitacion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- Libreria importante para uso de jstl, permite que el código de la página sea más legible--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -84,13 +85,18 @@
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Cantidad de personas</span>
                     <div class="col-sm-4">
                         <span class="form-text">
-                            Cada persona extra tiene un recargo de $25.50.
+                            $25.50 por persona (mínimo 1)
                         </span>
                         <div class="input-group">
                             <select class="form-control" name="cantidad" id="cantidad">
-                                <c:forEach begin="1" end="${cla.getCapacidad()}" var="i">
-                                    <option value="${i}">${i}</option>
-                                </c:forEach>
+                                <%
+                                    Clase_Habitacion cla = new Clase_Habitacion();
+                                    cla = (Clase_Habitacion) request.getAttribute("cla");
+                                    int capacidad = cla.getCapacidad();
+                                    for (int i = capacidad; i >= 1; i--) {
+                                %>
+                                <option value="<%= i%>"><%= i%></option>
+                                <% }%>
                             </select>
                         </div>
                     </div>
@@ -237,10 +243,11 @@
                         $(document).ready(function () {
                             $('#cantidad').change(function () {
                                 var precioBase = parseFloat('${cla.getPrecioBase()}');
+                                var capacidad = parseFloat ('${cla.getCapacidad()}');
                                 var precioExtra = 25.50; // Precio adicional por persona
                                 var cantidad = parseInt($(this).val());
 
-                                var precioTotal = precioBase + (precioExtra * (cantidad - 1));
+                                var precioTotal = precioBase - (precioExtra * (capacidad - cantidad));
 
                                 $('#precio-total').val(precioTotal.toFixed(2));
                             });

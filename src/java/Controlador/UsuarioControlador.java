@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpSession;
 public class UsuarioControlador extends HttpServlet {
 
     //Direcciones de nuestros archivos, usar direcciones absolutas para evitar problemas
-    String vistaEmp = "/PI_Reserva_De_Habitaciones/dashboardempe.html";
     String index = "/PI_Reserva_De_Habitaciones/index.jsp";
     String listar = "Usuario/listar.jsp";
     String add = "Usuario/agregar.jsp";
