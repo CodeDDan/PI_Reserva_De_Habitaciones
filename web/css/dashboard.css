@@ -83,7 +83,6 @@ header li:hover img {
 .boton-cerrar {
     border: 2px solid #777;
     border-radius: 30px;
-    margin-right: 80px;
     padding: 16px 24px;
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
@@ -102,6 +101,7 @@ header li:hover img {
 .boton-iniciar {
     border: 1px solid #FF7F00;
     border-radius: 30px;
+    margin-right: 80px;
     padding: 16px 24px;
     font-family: 'Nunito', sans-serif;
     font-size: 16px;

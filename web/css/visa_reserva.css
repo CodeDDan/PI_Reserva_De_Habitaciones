@@ -1,0 +1,30 @@
+/* 
+    Created on : 22 jul 2023, 16:50:51
+    Author     : Daniel
+*/
+
+.nav-principal, .contenedor-tabla-reservas {
+    margin: 0 80px;
+}
+
+.boton-editar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    transition: 0.3s ease;
+}
+
+/*
+https://codepen.io/sosuke/pen/Pjoqqp
+Para escoger un filtro a un color específico (Solo funciona con el color negro);
+*/
+
+.boton-editar:hover img {
+    transition: 0.3s ease;
+    filter: invert(74%) sepia(80%) saturate(854%) hue-rotate(167deg) brightness(102%) contrast(96%);
+    transform: scale(1.2);
+}

@@ -49,6 +49,47 @@ public class ModeloCombinadoDAO {
         return detalles;
     }
 
+    public List detallesReserva() {
+        List<String> reservas = new ArrayList<>();
+        String sql = """
+                    SELECT r.res_Id, u.usu_Nombre, u.usu_Apellido, u.usu_Correo, h.hab_Codigo, c.cla_Nombre, 
+                    r.res_NumeroDePersonas, r.res_FechaDeInicio, 
+                    r.res_FechaDeFin, r.res_PaisOrigen, f.fac_MontoTotal
+                    FROM reserva r
+                    INNER JOIN usuario u on u.usu_Id = r.usu_Id
+                    INNER JOIN habitacion h on h.hab_Id = r.hab_Id
+                    INNER JOIN clase_habitacion c on c.cla_Id = h.cla_Id
+                    INNER JOIN factura f on f.fac_Id = r.fac_Id
+                    WHERE r.activo !=0
+                    ORDER BY r.res_Id;""";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("res_Id");
+                String nombre = rs.getString("usu_Nombre");
+                String apellido = rs.getString("usu_Apellido");
+                String correo = rs.getString("usu_Correo");
+                String codigo = rs.getString("hab_Codigo");
+                String tipo = rs.getString("cla_Nombre");
+                String capacidad = rs.getString("res_NumeroDePersonas");
+                String llegada = rs.getString("res_FechaDeInicio");
+                String salida = rs.getString("res_FechaDeFin");
+                String origen = rs.getString("res_PaisOrigen");
+                String total = rs.getString("fac_MontoTotal");
+                String detalle = id + ", " + nombre + ", " + apellido + ", " + correo + ", " + codigo + ", "
+                        + tipo + ", " + capacidad + ", " + llegada + ", " + salida + ", " + origen
+                        + ", " + total;
+                reservas.add(detalle);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en el modelo combinado de reservas" + e);
+        }
+        return reservas;
+
+    }
+
     public List imagenesHabitacion(int hab_Id) {
         List<String> imagenes = new ArrayList<>();
         String sql = "SELECT img_Path FROM imagen WHERE hab_Id = ?;";

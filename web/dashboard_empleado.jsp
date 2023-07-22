@@ -27,12 +27,26 @@
                     <img src="iconos/Logo_hotel_base.png" alt="Hotel Sanz" class="imagen-logo">
                 </div>
                 <ul>
-                    <li><button type="button" class="boton-iniciar">Bienvenido ${emp.getNombre()}</button></li>
-                    <li><a href="index.jsp"><img src="iconos/icons8_downtown_50px.png" alt="Inicio" class="icono-header">Inicio</a></li>
+                    <li><a href="dashboard_empleado.jsp"><img src="iconos/icons8-edit-column-50.png" alt="CRUD" class="icono-header">CRUD</a></li>
                     <li><a href="habitaciones.jsp"><img src="iconos/icons8_booking_50px.png" alt="Habitaciones" class="icono-header">Habitaciones</a></li>
+                            <%
+                                EmpleadoDAO empDao = new EmpleadoDAO();
+                                Empleado emp = (Empleado) session.getAttribute("emp");
+                                List<String> perfiles = empDao.nombrePerfil(Integer.parseInt(emp.getId()));
+                                String perfil = "recepcionista";
+                                for (String p : perfiles) {
+                                    if (p.equalsIgnoreCase(perfil)) {
+                            %>
+                    <li><a href="vista_reservas.jsp"><img src="iconos/icons8-reserva-2-50.png" alt="reservas" class="icono-header">Vista de reservas</a></li>
+                            <%
+                                        break;
+                                    }
+                                }
+                            %>
                     <form id="cerrar-sesion" action="CerrarSesionControlador" method="post" style="display: none;">
                     </form>
                     <li><button class="boton-cerrar" type="submit" form="cerrar-sesion">Cerrar Sesión</button></li>
+                    <li><button type="button" class="boton-iniciar">Bienvenido ${emp.getNombre()}</button></li>
                 </ul>
             </header>
         </div>
@@ -48,8 +62,6 @@
                 </thead>
                 <tbody class="table-group-divider">
                     <%
-                        EmpleadoDAO empDao = new EmpleadoDAO();
-                        Empleado emp = (Empleado) session.getAttribute("emp");
                         List<String> permisos = empDao.obtenerPermisos(Integer.parseInt(emp.getId()));
                         for (String permiso : permisos) {
                             String[] accesos = permiso.split(",");

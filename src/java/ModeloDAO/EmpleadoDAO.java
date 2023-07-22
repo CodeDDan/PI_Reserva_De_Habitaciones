@@ -108,4 +108,26 @@ public class EmpleadoDAO implements EmpleadoCRUD {
         }
         return list;
     }
+    
+    public List nombrePerfil(int emp_Id) {
+        ArrayList<String> list = new ArrayList<>();
+        String sql;
+        sql = """
+              SELECT p.per_Nombre FROM perfil p
+              INNER JOIN empleado_perfil e ON e.per_Id = p.per_Id
+              WHERE emp_Id = ?""";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, emp_Id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String nombreP = rs.getString("per_Nombre");
+                list.add(nombreP);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el nombre del perfil" + e);
+        }
+        return list;
+    }
 }
