@@ -1,7 +1,11 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package Controlador;
 
-import Modelo.Habitacion;
-import ModeloDAO.HabitacionDAO;
+import Modelo.Imagen;
+import ModeloDAO.ImagenDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,22 +14,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *
  * @author Daniel
  */
-@WebServlet(name = "HabitacionControlador", urlPatterns = {"/HabitacionControlador"})
-public class HabitacionControlador extends HttpServlet {
+@WebServlet(name = "ImagenControlador", urlPatterns = {"/ImagenControlador"})
+public class ImagenControlador extends HttpServlet {
 
-    String listar = "Habitacion/listar.jsp";
-    String add = "Habitacion/agregar.jsp";
-    String edit = "Habitacion/editar.jsp";
-    HabitacionDAO habDao = new HabitacionDAO();
-    Habitacion hab = new Habitacion();
+    String listar = "Imagen/listar.jsp";
+    String add = "Imagen/agregar.jsp";
+    String edit = "Imagen/editar.jsp";
+    ImagenDAO imgDao = new ImagenDAO();
+    Imagen img = new Imagen();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +45,10 @@ public class HabitacionControlador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HabitacionControlador</title>");
+            out.println("<title>Servlet ImagenControlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HabitacionControlador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ImagenControlador at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,8 +73,8 @@ public class HabitacionControlador extends HttpServlet {
         } else if (action.equalsIgnoreCase("agregar")) {
             acceso = add;
         } else if (action.equalsIgnoreCase("editar")) {
-            int hab_id = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("hab", habDao.list(hab_id));
+            int img_id = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("img", imgDao.list(img_id));
             acceso = edit;
         }
         // Usar las lineas siguientes genera un reenvío de formulario
@@ -95,54 +96,29 @@ public class HabitacionControlador extends HttpServlet {
             throws ServletException, IOException {
         String action;
         action = request.getParameter("accion");
-        if (action.equalsIgnoreCase("agregar-habitacion")) {
-            String hol_Id = request.getParameter("hotel-id");
-            String cla_Id = request.getParameter("clase-id");
-            String codigo = request.getParameter("codigo");
-            String detalles = request.getParameter("detalles");
-            String ult_mantenimiento = request.getParameter("fecha-mantenimiento");
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha = new Date();
-            try {
-                fecha = formato.parse(ult_mantenimiento);
-            } catch (ParseException ex) {
-                System.err.println("Error al transformar la fecha");
-            }
-            hab.setHotelId(hol_Id);
-            hab.setClaseId(cla_Id);
-            hab.setCodigo(codigo);
-            hab.setDetalles(detalles);
-            hab.setUltimoMantenimiento(fecha);
-            habDao.add(hab);
+        if (action.equalsIgnoreCase("agregar_imagen")) {
+            System.out.println("post imagen");
+            String hab_Id = request.getParameter("habitacion-id");
+            String img_Path = request.getParameter("imagen-path");
+            img.setHabitacionId(Integer.parseInt(hab_Id));
+            img.setImagenPath(img_Path);
+            imgDao.add(img);
         } else if (action.equalsIgnoreCase("actualizar")) {
-            String hol_Id = request.getParameter("hotel-id");
-            String cla_Id = request.getParameter("clase-id");
-            String codigo = request.getParameter("codigo");
-            String detalles = request.getParameter("detalles");
-            String ult_mantenimiento = request.getParameter("fecha-mantenimiento");
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha = new Date();
-            try {
-                fecha = formato.parse(ult_mantenimiento);
-            } catch (ParseException ex) {
-                System.err.println("Error al transformar la fecha");
-            }
-            hab.setId(request.getParameter("id_edit"));
-            hab.setHotelId(hol_Id);
-            hab.setClaseId(cla_Id);
-            hab.setCodigo(codigo);
-            hab.setDetalles(detalles);
-            hab.setUltimoMantenimiento(fecha);
-            habDao.edit(hab);
+            String hab_Id = request.getParameter("habitacion-id");
+            String img_Path = request.getParameter("imagen-path");
+            img.setImagenId(Integer.parseInt(request.getParameter("id_edit")));
+            img.setHabitacionId(Integer.parseInt(hab_Id));
+            img.setImagenPath(img_Path);
+            imgDao.edit(img);
         } else if (action.equalsIgnoreCase("eliminar")) {
             int id = Integer.parseInt(request.getParameter("id"));
-            habDao.delete(id);
+            imgDao.delete(id);
         }
         /*
         La siguiente linea de código evita el reenvío de formulario, como las vistas de agregar 
         y editar se dirigen al mismo jsp, podemos usarlo sin problema.
          */
-        response.sendRedirect(request.getContextPath() + "/HabitacionControlador?accion=listar");
+        response.sendRedirect(request.getContextPath() + "/ImagenControlador?accion=listar");
     }
 
     /**

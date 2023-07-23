@@ -45,7 +45,6 @@ public class PagoDAO implements PagoCRUD {
     @Override
     public boolean edit(Pago pago) {
         String sql = "UPDATE Pago SET pag_Metodo = ?, pag_Monto = ?, pag_NumeroDeTarjeta = ? WHERE pag_Id = ?";
-        System.out.println(pago.getMetodo() + pago.getMonto() + pago.getNumeroDeTarjeta() + pago.getId());
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

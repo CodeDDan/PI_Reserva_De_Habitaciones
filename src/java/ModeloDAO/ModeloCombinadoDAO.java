@@ -92,7 +92,7 @@ public class ModeloCombinadoDAO {
 
     public List imagenesHabitacion(int hab_Id) {
         List<String> imagenes = new ArrayList<>();
-        String sql = "SELECT img_Path FROM imagen WHERE hab_Id = ?;";
+        String sql = "SELECT img_Path FROM imagen WHERE hab_Id = ? AND activo != 0;";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
