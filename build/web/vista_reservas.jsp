@@ -9,6 +9,8 @@
 <%@page import="Modelo.Empleado"%>
 <%@page import="ModeloDAO.EmpleadoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -79,40 +81,29 @@
                     <%
                         ModeloCombinadoDAO mcdDao = new ModeloCombinadoDAO();
                         List<String> detalles = mcdDao.detallesReserva();
-                        for (String detalle : detalles) {
-                            String[] elemento = detalle.split(",");
-                            String id = elemento[0];
-                            String nombre = elemento[1];
-                            String apellido = elemento[2];
-                            String correo = elemento[3];
-                            String codigo = elemento[4];
-                            String tipo = elemento[5];
-                            String cantidad = elemento[6];
-                            String llegada = elemento[7];
-                            String partida = elemento[8];
-                            String origen = elemento[9];
-                            String total = elemento[10];
-
+                        request.setAttribute("detalles", detalles);
                     %>
-                    <tr>
-                        <td><%= id%></td>
-                        <td><%= nombre%></td>
-                        <td><%= apellido%></td>
-                        <td><%= correo%></td>
-                        <td><%= codigo%></td>
-                        <td><%= tipo%></td>
-                        <td><%= cantidad%></td>
-                        <td><%= llegada%></td>
-                        <td><%= partida%></td>
-                        <td><%= origen%></td>
-                        <td><%= total%></td>
-                        <td>
-                            <a href="ReservaControlador?accion=listar" type="button" class="boton-editar">
-                                <img src="iconos/icons8_edit_property_20px.png" alt="editar">
-                            </a>
-                        </td>
-                    </tr>
-                    <% }%>
+                    <c:forEach var="detalle" items="${detalles}">
+                        <c:set var="elemento" value="${fn:split(detalle, ',')}"/>
+                        <tr>
+                            <td><c:out value="${elemento[0]}"/></td>
+                            <td><c:out value="${elemento[1]}"/></td>
+                            <td><c:out value="${elemento[2]}"/></td>
+                            <td><c:out value="${elemento[3]}"/></td>
+                            <td><c:out value="${elemento[4]}"/></td>
+                            <td><c:out value="${elemento[5]}"/></td>
+                            <td><c:out value="${elemento[6]}"/></td>
+                            <td><c:out value="${elemento[7]}"/></td>
+                            <td><c:out value="${elemento[8]}"/></td>
+                            <td><c:out value="${elemento[9]}"/></td>
+                            <td><c:out value="${elemento[10]}"/></td>
+                            <td>
+                                <a href="ReservaControlador?accion=listar" type="button" class="boton-editar">
+                                    <img src="iconos/icons8_edit_property_20px.png" alt="editar"/>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
