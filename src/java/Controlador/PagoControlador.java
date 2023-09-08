@@ -4,11 +4,17 @@
  */
 package Controlador;
 
+import Config.Email;
+import Modelo.Clase_Habitacion;
 import Modelo.Factura;
+import Modelo.FacturaPDFGenerator;
+import Modelo.Habitacion;
 import Modelo.Pago;
 import Modelo.Reserva;
 import Modelo.Usuario;
+import ModeloDAO.Clase_HabitacionDAO;
 import ModeloDAO.FacturaDAO;
+import ModeloDAO.HabitacionDAO;
 import ModeloDAO.PagoDAO;
 import ModeloDAO.ReservaDAO;
 import ModeloDAO.UsuarioDAO;
@@ -21,6 +27,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 
 /**
  *
@@ -37,6 +44,8 @@ public class PagoControlador extends HttpServlet {
     FacturaDAO facDao = new FacturaDAO();
     ReservaDAO resDao = new ReservaDAO();
     UsuarioDAO usuDao = new UsuarioDAO();
+    HabitacionDAO habDao = new HabitacionDAO();
+    Clase_HabitacionDAO claDao = new Clase_HabitacionDAO();
     Pago pago = new Pago();
     Factura factura = new Factura();
     Reserva reserva = new Reserva();
@@ -132,6 +141,7 @@ public class PagoControlador extends HttpServlet {
             int usu_id = usuDao.existeUsuario(correo, nombre, apellido);
             if (usu_id != -1) {
                 reserva.setUsuarioId(String.valueOf(usu_id));
+                usu = usuDao.list(usu_id);
             } else {
                 usu.setNombre(nombre);
                 usu.setApellido(apellido);
@@ -177,9 +187,17 @@ public class PagoControlador extends HttpServlet {
             reserva.setReservaEstado("Reservado");
             reserva.setComentario(comentario);
             resDao.add(reserva);
+            
+            Habitacion hab = habDao.list(Integer.parseInt(hab_id));
+            Clase_Habitacion cla = claDao.list(Integer.parseInt(hab.getClaseId()));
 
+            FacturaPDFGenerator pdf = new FacturaPDFGenerator();
+            pdf.generatePDF(factura.getCodigo(), usu, factura, reserva, 
+                    hab, cla, pago);
+            Email email = new Email();
+            email.enviarEmail(pdf.getRutaCompleta(), usu.getCorreo());
             HttpSession session = request.getSession();
-            session.setAttribute("reserva", "Reserva realizda con éxito!");
+            session.setAttribute("reserva", "Reserva realizda con éxito! Factura enviada al correo ingresado");
 
             response.sendRedirect(habitaciones);
             return;

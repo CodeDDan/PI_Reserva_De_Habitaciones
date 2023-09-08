@@ -110,7 +110,7 @@ $(document).ready(function () {
         // Establecer el valor máximo y mínimo en el campo montoPagar
         montoPagarInput.attr('min', montoMinimo);
         montoPagarInput.attr('max', precioTotal);
-        
+
         var modalTitle = $('.titulo-modal');
 
         // Actualizar el texto en el título del modal
@@ -125,7 +125,13 @@ $('input[name="numero-de-tarjeta"]').on('input', function () {
     // Expresión para validar el número de tarjeta
     var tarjetaValida = /^[0-9]{16}$/.test(numeroTarjeta);
 
-    if (tarjetaValida) {
+    if (validarLuhn(numeroTarjeta)) {
+        console.log("Número de tarjeta válido.");
+    } else {
+        console.log("Número de tarjeta no válido.");
+    }
+    
+    if (tarjetaValida && validarLuhn(numeroTarjeta)) {
         $(this).removeClass('is-invalid');
         $(this).addClass('is-valid');
     } else {
@@ -135,6 +141,27 @@ $('input[name="numero-de-tarjeta"]').on('input', function () {
 
     actualizarBotonEnvio();
 });
+
+// Función para validar el algoritmo de Luhn
+function validarLuhn(numeroTarjeta) {
+    // Paso 1: Convertir el número de tarjeta en un array de dígitos invertido
+    const digitos = numeroTarjeta.split('').map(Number).reverse();
+
+    // Paso 2: Duplicar los dígitos en las posiciones pares
+    for (let i = 1; i < digitos.length; i += 2) {
+        digitos[i] *= 2;
+
+        if (digitos[i] > 9) {
+            digitos[i] -= 9;
+        }
+    }
+
+    // Paso 3: Sumar todos los dígitos
+    const suma = digitos.reduce((total, digito) => total + digito, 0);
+
+    // Paso 4: El número de tarjeta es válido si la suma es un múltiplo de 10
+    return suma % 10 === 0;
+}
 
 // Tenemos que envolver la inicialización en document.ready para que se ejecute cada que se carga
 $(document).ready(function () {

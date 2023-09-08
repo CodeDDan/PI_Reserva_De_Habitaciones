@@ -84,9 +84,6 @@
                 <div class="form-group row reserva" style="display: flex; align-items: center;">
                     <span class="col-sm-3 col-form-label" style="font-weight: bold;">Cantidad de personas</span>
                     <div class="col-sm-4">
-                        <span class="form-text">
-                            $25.50 por persona (mínimo 1)
-                        </span>
                         <div class="input-group">
                             <select class="form-control" name="cantidad" id="cantidad">
                                 <%
@@ -243,13 +240,15 @@
                         $(document).ready(function () {
                             $('#cantidad').change(function () {
                                 var precioBase = parseFloat('${cla.getPrecioBase()}');
-                                var capacidad = parseFloat ('${cla.getCapacidad()}');
-                                var precioExtra = 25.50; // Precio adicional por persona
-                                var cantidad = parseInt($(this).val());
-
-                                var precioTotal = precioBase - (precioExtra * (capacidad - cantidad));
-
-                                $('#precio-total').val(precioTotal.toFixed(2));
+                                /*
+                                 var capacidad = parseFloat ('${cla.getCapacidad()}');
+                                 var precioExtra = 25.50; // Precio adicional por persona
+                                 var cantidad = parseInt($(this).val());
+                                 
+                                 var precioTotal = precioBase - (precioExtra * (capacidad - cantidad));
+                                 */
+                                // Con un solo precio base 
+                                $('#precio-total').val(precioBase.toFixed(2));
                             });
                         });
     </script>
