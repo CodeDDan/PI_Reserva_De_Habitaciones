@@ -1,0 +1,5 @@
+# .gitignore
+# Ignorar los siguientes .java
+src/java/Modelo/FacturaPDFGenerator.java
+# Ignorar las siguientes carpetas
+src/java/Config/
