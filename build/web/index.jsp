@@ -55,10 +55,11 @@
         </section>
         <div class="registro-rapido">
             <div class="registro-rapido-acciones">
-                <form class="formulario-rapido" method="post">
+                <form action="ReservaControlador" class="formulario-rapido">
                     <input type="date" class="flatpickr-input llegada" id="llegada" name="llegada" placeholder="Llegada">
                     <input type="date" class="flatpickr-input partida" id="salida" name="salida" placeholder="Salida">
-                    <button class="boton-registro-rapido">Reserva rápida, 1 persona</button>
+                    <input type="hidden" name="habitacion-id" value="1">
+                    <button type="submit" class="boton-registro-rapido" name="accion" value="reservar">Reserva rápida, 1 persona</button>
                 </form>
             </div>
         </div>

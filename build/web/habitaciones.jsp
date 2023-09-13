@@ -63,7 +63,7 @@
                 String cardTipo = elementos[3];
                 String cardText = elementos[4];
                 String capacidad = elementos[5];
-                String buttonLabel = "Costo de la reserva " + elementos[6] + " $";
+                String buttonLabel = "Valor por noche " + elementos[6] + " $";
 
             %>
             <div class="card">

@@ -1,12 +1,15 @@
 package ModeloDAO;
 
 import Config.Conexion;
+import Modelo.Reserva;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,6 +21,7 @@ public class ModeloCombinadoDAO {
     private Connection con;
     private PreparedStatement ps;
     private ResultSet rs;
+    private final ReservaDAO resDao = new ReservaDAO();
 
     public List detallesHabitaciones() {
         List<String> detalles = new ArrayList<>();
@@ -108,4 +112,60 @@ public class ModeloCombinadoDAO {
         return imagenes;
     }
 
+    public Map<String, Reserva> misReservas(int cli_Id) {
+        Map<String, Reserva> resultado = new HashMap<>();
+        String sql = "SELECT * FROM reserva r WHERE r.usu_Id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cli_Id);
+            rs = ps.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                i++;
+                String reserva = "reserva_" + i;
+                resultado.put(reserva, resDao.list(Integer.parseInt(rs.getString("res_Id"))));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener mis reservas");
+        }
+        return resultado;
+    }
+
+    public List detallesHabitacionReserva(int cli_Id) {
+        List<String> detalles = new ArrayList<>();
+        String sql = """
+                    SELECT h.hab_Id, h.hab_Codigo, h.hab_Detalles, ch.cla_Nombre, ch.cla_Descripcion, ch.cla_CapacidadMaxima, ch.cla_PrecioBase,
+                    	r.res_NumeroDePersonas, r.res_FechaDeInicio, r.res_FechaDeFin
+                        FROM reserva r
+                        INNER JOIN habitacion h ON h.hab_Id = r.hab_Id
+                        INNER JOIN clase_habitacion ch ON h.cla_Id = ch.cla_Id
+                        WHERE h.activo != 0 AND r.usu_Id = ? AND r.activo != 0
+                        ORDER BY h.hab_Id;""";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cli_Id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String habId = rs.getString("hab_Id");
+                String habCodigo = rs.getString("hab_Codigo");
+                String habDetalles = rs.getString("hab_Detalles");
+                String claNombre = rs.getString("cla_Nombre");
+                String claDescripcion = rs.getString("cla_Descripcion");
+                int claCapacidadMaxima = rs.getInt("cla_CapacidadMaxima");
+                double claPrecioBase = rs.getDouble("cla_PrecioBase");
+                String resNumeroPersonas = rs.getString("res_NumeroDePersonas");
+                String resFechaLlegada = rs.getString("res_FechaDeInicio");
+                String resFechaPartida = rs.getString("res_FechaDeFin");
+                String detalle = habId + ", " + habCodigo + ", " + habDetalles + ", " + claNombre + ", "
+                        + claDescripcion + ", " + claCapacidadMaxima + ", " + claPrecioBase + ", " + resNumeroPersonas
+                        + ", " + resFechaLlegada + ", " + resFechaPartida;
+                detalles.add(detalle);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en el update" + e);
+        }
+        return detalles;
+    }
 }

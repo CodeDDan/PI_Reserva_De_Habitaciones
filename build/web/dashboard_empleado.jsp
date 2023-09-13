@@ -69,6 +69,7 @@
                     %>
                     <c:forEach items="${acceso}" var="acceso">
                         <c:choose>
+                            <%-- comment
                             <c:when test="${acceso eq 'cla'}">
                                 <tr>
                                     <th scope="row">Clase de habitación</th>
@@ -76,6 +77,8 @@
                                     <td class="td-contenedor"><a href="Clase_HabitacionControlador?accion=listar" class="btn btn-dark">CRUD de Clase de Habitación</a></td>
                                 </tr>
                             </c:when>
+                                
+                             
                             <c:when test="${acceso eq 'epe'}">
                                 <tr>
                                     <th scope="row">Asignación de perfiles</th>
@@ -83,13 +86,14 @@
                                     <td class="td-contenedor"><a href="Empleado_PerfilControlador?accion=listar" class="btn btn-dark">CRUD de Asignación de Perfiles </a></td>
                                 </tr>
                             </c:when>
+                            
                             <c:when test="${acceso eq 'emp'}">
                                 <tr>
                                     <th scope="row">Empleado</th>
                                     <td>Administre la información de los empleados, edite su salario y sus características</td>
                                     <td class="td-contenedor"><a href="EmpleadoControlador?accion=listar" class="btn btn-dark">CRUD de Empleados</a></td>
                                 </tr>
-                            </c:when>
+                            </c:when> --%>
                             <c:when test="${acceso eq 'fac'}">
                                 <tr>
                                     <th scope="row">Factura</th>
@@ -125,13 +129,15 @@
                                     <td class="td-contenedor"><a href="PagoControlador?accion=listar" class="btn btn-dark">CRUD de Pagos</a></td>
                                 </tr>
                             </c:when>
+                               
+                            <%--
                             <c:when test="${acceso eq 'per'}">
                                 <tr>
                                     <th scope="row">Perfiles</th>
                                     <td>Cree nuevos perfiles, administre los permisos de los existentes</td>
                                     <td class="td-contenedor"><a href="PerfilControlador?accion=listar" class="btn btn-dark">CRUD de Perfiles</a></td>
                                 </tr>
-                            </c:when>
+                            </c:when> --%>
                             <c:when test="${acceso eq 'res'}">
                                 <tr>
                                     <th scope="row">Reserva</th>

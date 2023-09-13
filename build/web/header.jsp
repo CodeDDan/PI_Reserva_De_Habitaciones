@@ -15,8 +15,13 @@
             <li><a href="index.jsp"><img src="iconos/icons8_downtown_50px.png" alt="Inicio" class="icono-header">Inicio</a></li>
             <li><a href="habitaciones.jsp"><img src="iconos/icons8_booking_50px.png" alt="Habitaciones" class="icono-header">Habitaciones</a></li>
             <li><a href="#"><img src="iconos/icons8_people_50px.png" alt="Nosotros" class="icono-header">Sobre nosotros</a></li>
-            <li><a href="#"><img src="iconos/icons8_image_gallery_50px.png" alt="Galería" class="icono-header">Galería</a></li>
+
+            <c:if test="${sessionScope.usuario != null && sessionScope.emp == null}">
+                <li><a href="mis_reservas.jsp"><img src="iconos/icons8-ver-shedule-50.png" alt="Mis_Reservas" class="icono-header">Mis reservas</a></li>
+            </c:if>
+                
             <li class="barra-vertical"></li>
+
 
             <c:choose>
                 <c:when test="${sessionScope.usuario == null && sessionScope.emp == null}">

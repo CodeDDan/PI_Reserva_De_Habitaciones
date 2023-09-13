@@ -15,8 +15,11 @@ $(".flatpickr-input.llegada").flatpickr({
         $(".flatpickr-input.partida").each(function () {
             var flatpickrInstance = this._flatpickr;
             if (flatpickrInstance) {
-                flatpickrInstance.set("minDate", selectedDate);
-                flatpickrInstance.setDate(selectedDate);
+                // Calcular la fecha mínima como el día siguiente
+                var nextDay = new Date(selectedDate);
+
+                flatpickrInstance.set("minDate", nextDay.fp_incr(1));
+                flatpickrInstance.setDate(nextDay.fp_incr(1));
             }
         });
     }

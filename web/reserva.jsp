@@ -238,17 +238,19 @@
     <!-- El script debe ir aquí porque obtenemos datos de request.setAtribute -->
     <script>
                         $(document).ready(function () {
-                            $('#cantidad').change(function () {
+                            $(".flatpickr-input.llegada, .flatpickr-input.partida").change(function () {
+                                var fechaLlegada = $(".flatpickr-input.llegada")[0]._flatpickr.selectedDates[0];
+                                var fechaSalida = $(".flatpickr-input.partida")[0]._flatpickr.selectedDates[0];
+                                // Calcula la diferencia en días
+                                var tiempoDiferencia = fechaSalida.getTime() - fechaLlegada.getTime();
+                                var dias = Math.ceil(tiempoDiferencia / (1000 * 3600 * 24));
+
                                 var precioBase = parseFloat('${cla.getPrecioBase()}');
-                                /*
-                                 var capacidad = parseFloat ('${cla.getCapacidad()}');
-                                 var precioExtra = 25.50; // Precio adicional por persona
-                                 var cantidad = parseInt($(this).val());
-                                 
-                                 var precioTotal = precioBase - (precioExtra * (capacidad - cantidad));
-                                 */
-                                // Con un solo precio base 
-                                $('#precio-total').val(precioBase.toFixed(2));
+
+                                // Calcula el costo total
+                                var costoTotal = precioBase * dias;
+
+                                $('#precio-total').val(costoTotal.toFixed(2));
                             });
                         });
     </script>

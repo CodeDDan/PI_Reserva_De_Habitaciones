@@ -59,7 +59,7 @@
                 <div class="form-group row">
                     <span class="col-sm-2 col-form-label">DNI</span>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" name="dni" aria-describedby="dniHelp" placeholder="DNI" required>
+                        <input type="text" class="form-control" name="dni" aria-describedby="dniHelp" placeholder="DNI" required>
                         <div class="invalid-feedback">
                             Ingrese un DNI mayor a 10 números
                         </div>

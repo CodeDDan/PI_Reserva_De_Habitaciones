@@ -168,7 +168,7 @@ public class PagoControlador extends HttpServlet {
             pago.setNumeroDeTarjeta(numeroTarjeta);
 
             factura.setCodigo(factura.generarCodigoFactura());
-            factura.setFechaDeEmision(factura.obtenerFechaActual().toString());
+            factura.setFechaDeEmision(factura.obtenerFechaActual());
             factura.setMontoTotal(Double.parseDouble(montoPago));
             factura.setEstadoDeFactura("Pagado");
 
@@ -194,10 +194,10 @@ public class PagoControlador extends HttpServlet {
             FacturaPDFGenerator pdf = new FacturaPDFGenerator();
             pdf.generatePDF(factura.getCodigo(), usu, factura, reserva, 
                     hab, cla, pago);
-            Email email = new Email();
-            email.enviarEmail(pdf.getRutaCompleta(), usu.getCorreo());
+            //Email email = new Email();
+            //email.enviarEmail(pdf.getRutaCompleta(), usu.getCorreo());
             HttpSession session = request.getSession();
-            session.setAttribute("reserva", "Reserva realizda con éxito! Factura enviada al correo ingresado");
+            session.setAttribute("reserva", "Reserva realizda con éxito! Notificación enviada a su correo");
 
             response.sendRedirect(habitaciones);
             return;

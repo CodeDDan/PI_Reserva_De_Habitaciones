@@ -1,9 +1,10 @@
 <%-- 
-    Document   : habitaciones
-    Created on : 9 jul 2023, 20:50:25
+    Document   : mis_reservas
+    Created on : 12 sept 2023, 18:14:30
     Author     : Daniel
 --%>
 
+<%@page import="Modelo.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="ModeloDAO.ModeloCombinadoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,42 +14,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--  Links para usar boostrap, es importante que estén primeros para no perder los estilos propios-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <title>Sanz Habitaciones</title>
+        <title>Reservas realizadas</title>
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/habitaciones.css"/>
     </head>
     <body>
         <jsp:include page="header.jsp" />
-        <% if (session.getAttribute("reserva") != null) {%>
-        <div class="alert alert-primary alert-dismissible fade show alerta-personalizada" role="alert">
-            <strong> <%= session.getAttribute("reserva")%> </strong> 
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <%
-                session.removeAttribute("reserva");
-            %>
-        </div>
-        <% }%>
-        <div class="contenedor-texto-inicial">
-            <div class="texto-inicial">
-                Su estadía con Hotel Sanz incluye los siguientes servicios
-            </div>
-        </div>
-        <div class="contenedor-lista">
-            <ul class="lista-servicios">
-                <li><img src="iconos/icons8-garage-50.png" alt="Inicio" class="icono-header">Estacionamiento</li>
-                <li><img src="iconos/icons8-wifi-50.png" alt="Inicio" class="icono-header">WiFi</li>
-                <li><img src="iconos/icons8-poolside-bar-50.png" alt="Inicio" class="icono-header">Restaurante</li>
-                <li><img src="iconos/icons8-pool-50.png" alt="Inicio" class="icono-header">Piscina al aire libre</li>
-                <li><img src="iconos/icons8-gym-50.png" alt="Inicio" class="icono-header">Gimnasio</li>
-                <li><img src="iconos/icons8-pets-50.png" alt="Inicio" class="icono-header">Habitación para mascotas</li>
-                <li><img src="iconos/icons8-meeting-room-50.png" alt="Inicio" class="icono-header">Centro de negocios</li>
-            </ul>
-        </div>
         <div class="card-container">
             <%
                 ModeloCombinadoDAO mcd = new ModeloCombinadoDAO();
-                List<String> detalles = mcd.detallesHabitaciones();
+                Usuario usuario = (Usuario) session.getAttribute("usuario");
+                List<String> detalles = mcd.detallesHabitacionReserva(Integer.parseInt(usuario.getId()));
                 String imagenPrincipal = "";
                 int count = 0;
                 for (String detalle : detalles) {
@@ -63,7 +40,10 @@
                 String cardTipo = elementos[3];
                 String cardText = elementos[4];
                 String capacidad = elementos[5];
-                String buttonLabel = "Valor por noche " + elementos[6] + " $";
+                String numeroPersonas = elementos[7];
+                String fechaLlegada = elementos[8];
+                String fechaPartida = elementos[9];
+                String buttonLabel = "Ver detalles " + elementos[1];
 
             %>
             <div class="card">
@@ -130,7 +110,18 @@
                 <!--img src="..." class="card-img-top" alt="..." style="width: 100%; height: 220px; object-fit: cover;"-->
                 <div class="card-body">
                     <h5 class="card-title"><%= cardTipo%></h5>
-                    <p class="card-text"><%= cardText%></p>
+                    <div class="input-group mb-2">
+                        <button class="btn btn-outline-dark" type="button" style="min-width: 220px">Fecha de Llegada</button>
+                        <button class="btn active btn-outline-dark" type="button"><%= fechaLlegada %></button>
+                    </div>
+                    <div class="input-group mb-2">
+                        <button class="btn btn-outline-dark" type="button" style="min-width: 220px">Fecha de Partida</button>
+                        <button class="btn active btn-outline-dark" type="button"><%= fechaPartida %></button>
+                    </div>
+                    <div class="input-group mb-2">
+                        <button class="btn btn-outline-dark" type="button" style="min-width: 220px">Cantidad de Personas</button>
+                        <button class="btn active btn-outline-dark" type="button"><%= numeroPersonas%></button>
+                    </div>
                     <button type="button" class="btn btn-primary boton-modal-propio" data-bs-toggle="modal" data-bs-target="#modal<%= count%>"><%= buttonLabel%></button>
                 </div>
             </div>
@@ -157,7 +148,6 @@
                             <form action="ReservaControlador">
                                 <input type="hidden" name="habitacion-id" value="<%= habitacionId%>">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary" name="accion" value="reservar">Reservar</button>
                             </form>
                         </div>
                     </div>
@@ -180,8 +170,6 @@
             </ul>
         </footer>
     </body>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <!-- Se debe agregar el index.js porque contiene el script para la función del switch para empleado-->

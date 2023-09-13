@@ -1,8 +1,11 @@
 package Modelo;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 
 /**
  *
@@ -92,10 +95,15 @@ public class Factura {
         return codigoFactura;
     }
 
-    public Date obtenerFechaActual() {
-        // Obtener la fecha actual
+    public String obtenerFechaActual() {
+         // Obtener la fecha actual
         Date fechaActual = new Date();
-        return fechaActual;
+
+        // Crear un formato de fecha en español
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", new Locale("es", "ES"));
+
+        // Formatear la fecha como una cadena en español
+        return formatoFecha.format(fechaActual);
     }
 
 }
